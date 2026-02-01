@@ -13,6 +13,8 @@ body {
     align-items: center;
     padding: 20px;
     touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .header {
