@@ -1,4 +1,4 @@
-const CACHE_NAME = 'word2048-v5';
+const CACHE_NAME = 'word2048-v6';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',

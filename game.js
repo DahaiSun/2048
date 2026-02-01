@@ -583,28 +583,28 @@ class WordGame {
         document.addEventListener('touchstart', (e) => {
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
-        }, { passive: false });
+        }, { passive: true });
 
         document.addEventListener('touchmove', (e) => {
-            // Prevent default behavior (scrolling) during swipes on the game
-            // We might want to be careful here if the user needs to scroll elsewhere.
-            // But since the game fits on screen and has user-scalable=no, global prevention is usually desired for this type of game.
-            e.preventDefault();
+            // Only prevent default when actually swiping (not just touching)
+            const dx = Math.abs(e.touches[0].clientX - touchStartX);
+            const dy = Math.abs(e.touches[0].clientY - touchStartY);
+            if (dx > 10 || dy > 10) {
+                e.preventDefault();
+            }
         }, { passive: false });
 
         document.addEventListener('touchend', (e) => {
-            if (!this.hasWon && !this.isGameOver()) { // Only process if game is active
-                const touchEndX = e.changedTouches[0].clientX;
-                const touchEndY = e.changedTouches[0].clientY;
-                const dx = touchEndX - touchStartX;
-                const dy = touchEndY - touchStartY;
-                const minSwipe = 50;
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const dx = touchEndX - touchStartX;
+            const dy = touchEndY - touchStartY;
+            const minSwipe = 30; // Reduced threshold for better responsiveness
 
-                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > minSwipe) {
-                    this.move(dx > 0 ? 'right' : 'left');
-                } else if (Math.abs(dy) > minSwipe) {
-                    this.move(dy > 0 ? 'down' : 'up');
-                }
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > minSwipe) {
+                this.move(dx > 0 ? 'right' : 'left');
+            } else if (Math.abs(dy) > minSwipe) {
+                this.move(dy > 0 ? 'down' : 'up');
             }
         });
         // Mouse Swipe Support
