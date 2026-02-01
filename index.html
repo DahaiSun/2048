@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Word2048 Enhanced</title>
+
+    <!-- PWA Settings -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#bbada0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon.png">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker registered', reg))
+                    .catch(err => console.log('Service Worker registration failed', err));
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>🎮 Word2048</h1>
+
+        <!-- Score Panel moved to bottom -->
+
+        <!-- CEFR Level Selector removed from here -->
+
+        <div class="controls">
+            <button onclick="game.restart()" class="btn-primary">🔄 新游戏</button>
+            <button onclick="game.showStats()" class="btn-secondary">📊 统计</button>
+            <button onclick="game.showLevels()" class="btn-secondary">📚 词书</button>
+            <button onclick="game.showSettings()" class="btn-secondary">⚙️ 设置</button>
+        </div>
+
+    </div>
+
+    <div class="game-container" id="game-container">
+        <div class="grid-container" id="grid">
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+            <div class="grid-cell"></div>
+        </div>
+        <div class="tile-container" id="tile-container"></div>
+    </div>
+
+    <div class="game-info bottom-panel">
+        <div class="score-container">
+            <div class="score-label">当前分数</div>
+            <div class="score-value" id="score">0</div>
+        </div>
+        <div class="score-container">
+            <div class="score-label">最高分</div>
+            <div class="score-value" id="best-score">0</div>
+        </div>
+        <div class="score-container">
+            <div class="score-label">已学单词</div>
+            <div class="score-value" id="word-count">0</div>
+        </div>
+        <div class="score-container">
+            <div class="score-label">词池</div>
+            <div class="score-value" id="pool-count">0</div>
+        </div>
+    </div>
+
+    <!-- 游戏结束弹窗 -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2>🎉 游戏结束</h2>
+            <div class="final-stats">
+                <p>最终得分: <strong id="final-score">0</strong></p>
+                <p>学习单词: <strong id="final-words">0</strong></p>
+                <p id="new-record" style="display:none; color:#e74c3c; font-weight:bold;">🏆 新纪录！</p>
+            </div>
+            <div class="modal-buttons">
+                <button
+                    onclick="game.restart(); this.parentElement.parentElement.parentElement.classList.remove('active')"
+                    class="btn-primary">再来一局</button>
+                <button onclick="this.parentElement.parentElement.parentElement.classList.remove('active')"
+                    class="btn-secondary">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 统计弹窗 -->
+    <div class="modal" id="stats-modal">
+        <div class="modal-content">
+            <h2>📊 学习统计</h2>
+            <div class="stats-content">
+                <div class="stat-item">
+                    <span class="stat-label">游戏次数:</span>
+                    <span class="stat-value" id="total-games">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">总学习单词:</span>
+                    <span class="stat-value" id="total-words">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">历史最高分:</span>
+                    <span class="stat-value" id="all-time-best">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">总游戏时长:</span>
+                    <span class="stat-value" id="total-time">0 分钟</span>
+                </div>
+            </div>
+            <div class="learned-words-section">
+                <h3>已学单词列表（点击朗读）</h3>
+                <div class="learned-words-list" id="learned-words-list"></div>
+            </div>
+            <div class="modal-buttons">
+                <button onclick="game.resetStats()" class="btn-warning">清除统计</button>
+                <button onclick="this.parentElement.parentElement.parentElement.classList.remove('active')"
+                    class="btn-secondary">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置弹窗 -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <h2>⚙️ 设置</h2>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <button onclick="game.toggleSound()" class="btn-secondary" id="sound-btn" style="width: 100%;">🔊
+                        音效: 开</button>
+                </div>
+                <div class="setting-item">
+                    <button onclick="game.toggleMusic()" class="btn-secondary" id="music-btn" style="width: 100%;">🔇
+                        音乐: 关</button>
+                </div>
+                <div class="setting-item">
+                    <label for="bgm-volume" style="display: block; margin-bottom: 5px; color: #34495e;">🎵 音乐音量</label>
+                    <input type="range" id="bgm-volume" min="0" max="1" step="0.01" value="0.2"
+                        onchange="game.setMusicVolume(this.value)" oninput="game.setMusicVolume(this.value)"
+                        title="音乐音量" style="width: 100%;">
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button onclick="this.parentElement.parentElement.parentElement.classList.remove('active')"
+                    class="btn-secondary">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 难度选择弹窗 -->
+    <div class="modal" id="levels-modal">
+        <div class="modal-content">
+            <h2>📚 选择词书</h2>
+            <div class="level-selector-wrap" style="margin: 0; text-align: center;">
+                <p style="color: #7f8c8d; margin-bottom: 15px;">选择词汇等级（可多选）</p>
+                <div class="level-selector" id="level-selector" style="justify-content: center;"></div>
+            </div>
+            <div class="modal-buttons">
+                <button onclick="this.parentElement.parentElement.parentElement.classList.remove('active')"
+                    class="btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="oxford_vocabulary.js"></script>
+    <script src="vocabulary.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>

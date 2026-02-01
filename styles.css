@@ -1,0 +1,1003 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    touch-action: none;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeInDown 0.5s ease-out;
+}
+
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: 100%;
+    max-width: 350px;
+}
+
+.score-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    flex: 1;
+    min-width: 60px;
+    transition: transform 0.3s;
+}
+
+.score-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.settings-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.setting-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.score-label {
+    font-size: 0.6em;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.score-value {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 2px;
+}
+
+/* ============================
+   CEFR Level Selector
+   ============================ */
+.level-selector-wrap {
+    margin-bottom: 15px;
+}
+
+.level-selector-label {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9em;
+    margin-bottom: 8px;
+}
+
+.level-selector {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.level-btn {
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.95em;
+    font-weight: 700;
+    border: 2px solid #bdc3c7;
+    background: #f8f9fa;
+    color: #7f8c8d;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    user-select: none;
+}
+
+.level-btn:hover {
+    background: #ecf0f1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.level-btn.active {
+    background: rgba(255, 255, 255, 0.95);
+    color: #2c3e50;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.level-btn.active:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* ============================
+   Controls
+   ============================ */
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3498db, #2874a6);
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+    color: white;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white;
+}
+
+
+/* ============================
+   Game Board
+   ============================ */
+.game-container {
+    position: relative;
+    background: #bbada0;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    touch-action: none;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 12px;
+    width: 350px;
+    height: 350px;
+}
+
+.grid-cell {
+    background: rgba(238, 228, 218, 0.35);
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+}
+
+.tile-container {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    pointer-events: none;
+}
+
+/* ============================
+   Tiles
+   ============================ */
+.tile {
+    position: absolute;
+    width: 77px;
+    height: 77px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    transition: transform 150ms ease-in-out, left 0s, top 0s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    pointer-events: auto;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.tile:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.08);
+}
+
+.tile-new {
+    animation: appear 0.2s ease-out;
+}
+
+.tile-merged {
+    animation: pop 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 20;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tile-word {
+    font-size: 0.85em;
+    margin-bottom: 1px;
+    text-align: center;
+    line-height: 1.2;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    max-width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tile-meaning {
+    font-size: 0.6em;
+    opacity: 0.85;
+    font-weight: normal;
+    max-width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 右下角数值 */
+.tile-level {
+    position: absolute;
+    bottom: 3px;
+    right: 4px;
+    font-size: 0.55em;
+    background: rgba(255, 255, 255, 0.35);
+    padding: 1px 5px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* 左上角 CEFR 标识 */
+.tile-cefr-badge {
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    font-size: 0.5em;
+    padding: 1px 5px;
+    border-radius: 8px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.cefr-A1 {
+    background: #27ae60;
+    color: white;
+}
+
+.cefr-A2 {
+    background: #2ecc71;
+    color: white;
+}
+
+.cefr-B1 {
+    background: #f39c12;
+    color: white;
+}
+
+.cefr-B2 {
+    background: #e67e22;
+    color: white;
+}
+
+.cefr-C1 {
+    background: #e74c3c;
+    color: white;
+}
+
+/* ============================
+   CEFR-based tile colors
+   ============================ */
+
+/* A1 - 绿色系 (入门) */
+.tile-cefr-A1-1 {
+    background: linear-gradient(135deg, #d5f5e3, #abebc6);
+    color: #1e8449;
+}
+
+.tile-cefr-A1-2 {
+    background: linear-gradient(135deg, #abebc6, #82e0aa);
+    color: #1a7a3e;
+}
+
+.tile-cefr-A1-3 {
+    background: linear-gradient(135deg, #82e0aa, #58d68d);
+    color: #186f34;
+}
+
+.tile-cefr-A1-4 {
+    background: linear-gradient(135deg, #58d68d, #2ecc71);
+    color: #145a29;
+}
+
+.tile-cefr-A1-5 {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: #ffffff;
+}
+
+.tile-cefr-A1-6 {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    color: #ffffff;
+}
+
+.tile-cefr-A1-7 {
+    background: linear-gradient(135deg, #229954, #1e8449);
+    color: #ffffff;
+}
+
+.tile-cefr-A1-8 {
+    background: linear-gradient(135deg, #1e8449, #196f3d);
+    color: #ffffff;
+}
+
+.tile-cefr-A1-9 {
+    background: linear-gradient(135deg, #196f3d, #145a32);
+    color: #ffffff;
+}
+
+.tile-cefr-A1-10 {
+    background: linear-gradient(135deg, #145a32, #0e4525);
+    color: #ffffff;
+}
+
+.tile-cefr-A1-11 {
+    background: linear-gradient(135deg, #0e4525, #0a3018);
+    color: #ffd700;
+    font-weight: 900;
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.6);
+}
+
+/* A2 - 青蓝色系 (初级) */
+.tile-cefr-A2-1 {
+    background: linear-gradient(135deg, #d1f2eb, #a3e4d7);
+    color: #117a65;
+}
+
+.tile-cefr-A2-2 {
+    background: linear-gradient(135deg, #a3e4d7, #76d7c4);
+    color: #0e6655;
+}
+
+.tile-cefr-A2-3 {
+    background: linear-gradient(135deg, #76d7c4, #48c9b0);
+    color: #0b5345;
+}
+
+.tile-cefr-A2-4 {
+    background: linear-gradient(135deg, #48c9b0, #1abc9c);
+    color: #0a4f3e;
+}
+
+.tile-cefr-A2-5 {
+    background: linear-gradient(135deg, #1abc9c, #17a589);
+    color: #ffffff;
+}
+
+.tile-cefr-A2-6 {
+    background: linear-gradient(135deg, #17a589, #148f77);
+    color: #ffffff;
+}
+
+.tile-cefr-A2-7 {
+    background: linear-gradient(135deg, #148f77, #117a65);
+    color: #ffffff;
+}
+
+.tile-cefr-A2-8 {
+    background: linear-gradient(135deg, #117a65, #0e6655);
+    color: #ffffff;
+}
+
+.tile-cefr-A2-9 {
+    background: linear-gradient(135deg, #0e6655, #0b5345);
+    color: #ffffff;
+}
+
+.tile-cefr-A2-10 {
+    background: linear-gradient(135deg, #0b5345, #084034);
+    color: #ffffff;
+}
+
+.tile-cefr-A2-11 {
+    background: linear-gradient(135deg, #084034, #052e24);
+    color: #ffd700;
+    font-weight: 900;
+    box-shadow: 0 0 20px rgba(26, 188, 156, 0.6);
+}
+
+/* B1 - 黄橙色系 (中级) */
+.tile-cefr-B1-1 {
+    background: linear-gradient(135deg, #fef9e7, #fdebd0);
+    color: #b7950b;
+}
+
+.tile-cefr-B1-2 {
+    background: linear-gradient(135deg, #fdebd0, #fad7a0);
+    color: #b7950b;
+}
+
+.tile-cefr-B1-3 {
+    background: linear-gradient(135deg, #fad7a0, #f8c471);
+    color: #9c7d0a;
+}
+
+.tile-cefr-B1-4 {
+    background: linear-gradient(135deg, #f8c471, #f5b041);
+    color: #7d6608;
+}
+
+.tile-cefr-B1-5 {
+    background: linear-gradient(135deg, #f5b041, #f39c12);
+    color: #5e4f07;
+}
+
+.tile-cefr-B1-6 {
+    background: linear-gradient(135deg, #f39c12, #d4ac0d);
+    color: #ffffff;
+}
+
+.tile-cefr-B1-7 {
+    background: linear-gradient(135deg, #d4ac0d, #b7950b);
+    color: #ffffff;
+}
+
+.tile-cefr-B1-8 {
+    background: linear-gradient(135deg, #b7950b, #9a7d0a);
+    color: #ffffff;
+}
+
+.tile-cefr-B1-9 {
+    background: linear-gradient(135deg, #9a7d0a, #7d6608);
+    color: #ffffff;
+}
+
+.tile-cefr-B1-10 {
+    background: linear-gradient(135deg, #7d6608, #5f4e06);
+    color: #ffffff;
+}
+
+.tile-cefr-B1-11 {
+    background: linear-gradient(135deg, #5f4e06, #423604);
+    color: #ffd700;
+    font-weight: 900;
+    box-shadow: 0 0 20px rgba(243, 156, 18, 0.6);
+}
+
+/* B2 - 橙红色系 (中高级) */
+.tile-cefr-B2-1 {
+    background: linear-gradient(135deg, #fbeee6, #f6ddcc);
+    color: #ba4a00;
+}
+
+.tile-cefr-B2-2 {
+    background: linear-gradient(135deg, #f6ddcc, #edbb99);
+    color: #a84300;
+}
+
+.tile-cefr-B2-3 {
+    background: linear-gradient(135deg, #edbb99, #e59866);
+    color: #973c00;
+}
+
+.tile-cefr-B2-4 {
+    background: linear-gradient(135deg, #e59866, #dc7633);
+    color: #873500;
+}
+
+.tile-cefr-B2-5 {
+    background: linear-gradient(135deg, #dc7633, #d35400);
+    color: #ffffff;
+}
+
+.tile-cefr-B2-6 {
+    background: linear-gradient(135deg, #d35400, #ba4a00);
+    color: #ffffff;
+}
+
+.tile-cefr-B2-7 {
+    background: linear-gradient(135deg, #ba4a00, #a04000);
+    color: #ffffff;
+}
+
+.tile-cefr-B2-8 {
+    background: linear-gradient(135deg, #a04000, #873600);
+    color: #ffffff;
+}
+
+.tile-cefr-B2-9 {
+    background: linear-gradient(135deg, #873600, #6e2c00);
+    color: #ffffff;
+}
+
+.tile-cefr-B2-10 {
+    background: linear-gradient(135deg, #6e2c00, #552200);
+    color: #ffffff;
+}
+
+.tile-cefr-B2-11 {
+    background: linear-gradient(135deg, #552200, #3c1800);
+    color: #ffd700;
+    font-weight: 900;
+    box-shadow: 0 0 20px rgba(211, 84, 0, 0.6);
+}
+
+/* C1 - 红紫色系 (高级) */
+.tile-cefr-C1-1 {
+    background: linear-gradient(135deg, #fdedec, #f5b7b1);
+    color: #922b21;
+}
+
+.tile-cefr-C1-2 {
+    background: linear-gradient(135deg, #f5b7b1, #f1948a);
+    color: #7b241c;
+}
+
+.tile-cefr-C1-3 {
+    background: linear-gradient(135deg, #f1948a, #ec7063);
+    color: #641e16;
+}
+
+.tile-cefr-C1-4 {
+    background: linear-gradient(135deg, #ec7063, #e74c3c);
+    color: #4d1711;
+}
+
+.tile-cefr-C1-5 {
+    background: linear-gradient(135deg, #e74c3c, #cb4335);
+    color: #ffffff;
+}
+
+.tile-cefr-C1-6 {
+    background: linear-gradient(135deg, #cb4335, #b03a2e);
+    color: #ffffff;
+}
+
+.tile-cefr-C1-7 {
+    background: linear-gradient(135deg, #b03a2e, #943126);
+    color: #ffffff;
+}
+
+.tile-cefr-C1-8 {
+    background: linear-gradient(135deg, #943126, #78281f);
+    color: #ffffff;
+}
+
+.tile-cefr-C1-9 {
+    background: linear-gradient(135deg, #78281f, #5c1f17);
+    color: #ffffff;
+}
+
+.tile-cefr-C1-10 {
+    background: linear-gradient(135deg, #5c1f17, #401610);
+    color: #ffffff;
+}
+
+.tile-cefr-C1-11 {
+    background: linear-gradient(135deg, #401610, #240c09);
+    color: #ffd700;
+    font-weight: 900;
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
+}
+
+/* ============================
+   Toast Notification
+   ============================ */
+#toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(44, 62, 80, 0.95);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 0.95em;
+    font-weight: 600;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.35s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    backdrop-filter: blur(10px);
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ============================
+   Modals
+   ============================ */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.final-stats {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.2em;
+    color: #34495e;
+}
+
+.final-stats p {
+    margin: 10px 0;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.stats-content {
+    margin: 20px 0;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    margin: 8px 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+}
+
+.stat-label {
+    color: #7f8c8d;
+    font-weight: 600;
+}
+
+.stat-value {
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.learned-words-section {
+    margin-top: 20px;
+}
+
+.learned-words-section h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.learned-words-list {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.word-badge {
+    background: linear-gradient(135deg, #3498db, #2874a6);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.word-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================
+   Responsive
+   ============================ */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .header {
+        margin-bottom: 10px;
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        font-size: 0.9em;
+        margin-bottom: 10px;
+    }
+
+    /* 优化分数板布局 */
+    .game-info {
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .score-container {
+        padding: 5px 8px;
+        min-width: 60px;
+        border-radius: 10px;
+    }
+
+    .score-label {
+        font-size: 0.6em;
+    }
+
+    .score-value {
+        font-size: 1.1em;
+        margin-top: 2px;
+    }
+
+    /* 难度选择器更紧凑 */
+    .level-selector-wrap {
+        margin-bottom: 10px;
+    }
+
+    .level-selector-label {
+        font-size: 0.8em;
+        margin-bottom: 5px;
+    }
+
+    .level-btn {
+        padding: 6px 12px;
+        font-size: 0.8em;
+        border-width: 1px;
+    }
+
+    /* 按钮保持横向排列，自动换行，不要垂直堆叠 */
+    .controls {
+        flex-direction: row;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: auto;
+        flex: 1;
+        /* 让按钮平分宽度 */
+        min-width: 45%;
+        /* 一行放两个 */
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+
+    /* 音量条调整 */
+    #bgm-volume {
+        width: 100% !important;
+        /* 独占一行 */
+        margin-top: 5px;
+    }
+
+    /* 游戏棋盘适配 */
+    .game-container {
+        padding: 10px;
+        margin-top: 0;
+    }
+
+    .grid-container {
+        width: 300px;
+        height: 300px;
+        gap: 10px;
+    }
+
+    .tile {
+        width: 66px;
+        /* (300 - 10*5) / 4 ≈ 62.5, but grid gap takes space. Let's fix calculation matches grid-template */
+        height: 66px;
+        /* Correction: grid gap is 10px. 4 cols means 3 gaps = 30px. 300-30=270. 270/4 = 67.5px */
+        width: 67px;
+        height: 67px;
+    }
+
+    .tile-word {
+        font-size: 0.7em;
+    }
+
+    .tile-meaning {
+        font-size: 0.5em;
+        /* 手机上释义字体再小一点 */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        /* 最多显示2行 */
+        -webkit-box-orient: vertical;
+        white-space: normal;
+        /* 允许换行 */
+    }
+}
+
+/* 针对特别小的屏幕 (iPhone SE等) */
+@media (max-width: 380px) {
+    .grid-container {
+        width: 280px;
+        height: 280px;
+    }
+
+    .tile {
+        width: 62px;
+        height: 62px;
+    }
+}
+
+/* ============================
+   Scrollbar
+   ============================ */
+.learned-words-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.learned-words-list::-webkit-scrollbar-track {
+    background: #ecf0f1;
+    border-radius: 4px;
+}
+
+.learned-words-list::-webkit-scrollbar-thumb {
+    background: #95a5a6;
+    border-radius: 4px;
+}
+
+.learned-words-list::-webkit-scrollbar-thumb:hover {
+    background: #7f8c8d;
+}
