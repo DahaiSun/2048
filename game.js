@@ -579,26 +579,32 @@ class WordGame {
         let touchStartX = 0;
         let touchStartY = 0;
 
-        this.gameContainer.addEventListener('touchstart', (e) => {
+        // Use document to capture swipes anywhere on screen
+        document.addEventListener('touchstart', (e) => {
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
         }, { passive: false });
 
-        this.gameContainer.addEventListener('touchmove', (e) => {
+        document.addEventListener('touchmove', (e) => {
+            // Prevent default behavior (scrolling) during swipes on the game
+            // We might want to be careful here if the user needs to scroll elsewhere.
+            // But since the game fits on screen and has user-scalable=no, global prevention is usually desired for this type of game.
             e.preventDefault();
         }, { passive: false });
 
-        this.gameContainer.addEventListener('touchend', (e) => {
-            const touchEndX = e.changedTouches[0].clientX;
-            const touchEndY = e.changedTouches[0].clientY;
-            const dx = touchEndX - touchStartX;
-            const dy = touchEndY - touchStartY;
-            const minSwipe = 50;
+        document.addEventListener('touchend', (e) => {
+            if (!this.hasWon && !this.isGameOver()) { // Only process if game is active
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+                const dx = touchEndX - touchStartX;
+                const dy = touchEndY - touchStartY;
+                const minSwipe = 50;
 
-            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > minSwipe) {
-                this.move(dx > 0 ? 'right' : 'left');
-            } else if (Math.abs(dy) > minSwipe) {
-                this.move(dy > 0 ? 'down' : 'up');
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > minSwipe) {
+                    this.move(dx > 0 ? 'right' : 'left');
+                } else if (Math.abs(dy) > minSwipe) {
+                    this.move(dy > 0 ? 'down' : 'up');
+                }
             }
         });
     }
