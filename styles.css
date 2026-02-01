@@ -315,22 +315,22 @@ button:active {
     font-size: 0.85em;
     margin-bottom: 1px;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.1;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     max-width: 95%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .tile-meaning {
-    font-size: 0.6em;
+    font-size: 0.55em;
     opacity: 0.85;
     font-weight: normal;
     max-width: 95%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.1;
 }
 
 /* 右下角数值 */
