@@ -613,6 +613,8 @@ class WordGame {
         let isMouseDown = false;
 
         document.addEventListener('mousedown', (e) => {
+            // Prevent text selection which interferes with drag/swipe
+            e.preventDefault();
             isMouseDown = true;
             mouseStartX = e.clientX;
             mouseStartY = e.clientY;
