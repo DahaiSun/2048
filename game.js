@@ -607,6 +607,35 @@ class WordGame {
                 }
             }
         });
+        // Mouse Swipe Support
+        let mouseStartX = 0;
+        let mouseStartY = 0;
+        let isMouseDown = false;
+
+        document.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+            mouseStartX = e.clientX;
+            mouseStartY = e.clientY;
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (!isMouseDown) return;
+            isMouseDown = false;
+
+            if (!this.hasWon && !this.isGameOver()) {
+                const mouseEndX = e.clientX;
+                const mouseEndY = e.clientY;
+                const dx = mouseEndX - mouseStartX;
+                const dy = mouseEndY - mouseStartY;
+                const minSwipe = 50;
+
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > minSwipe) {
+                    this.move(dx > 0 ? 'right' : 'left');
+                } else if (Math.abs(dy) > minSwipe) {
+                    this.move(dy > 0 ? 'down' : 'up');
+                }
+            }
+        });
     }
 
     saveBestScore() {
