@@ -141,10 +141,21 @@ class WordGame {
             const startAudio = () => {
                 this.soundGenerator._getContext().resume().then(() => {
                     this.soundGenerator.startBGM();
-                    // Apply volume from slider (which defaults to 0.2)
-                    const volSlider = document.getElementById('bgm-volume');
-                    if (volSlider) {
-                        this.soundGenerator.setBGMVolume(parseFloat(volSlider.value));
+
+                    // Apply BGM volume from settings
+                    const bgmVolSlider = document.getElementById('bgm-volume');
+                    if (bgmVolSlider) {
+                        this.soundGenerator.setBGMVolume(parseFloat(bgmVolSlider.value));
+                    }
+
+                    // Apply Word Volume from settings
+                    const wordVolSlider = document.getElementById('word-volume');
+                    if (wordVolSlider) {
+                        const savedWordVol = localStorage.getItem('wordVolume');
+                        if (savedWordVol !== null) {
+                            wordVolSlider.value = savedWordVol;
+                        }
+                        this.audioPlayer.setVolume(parseFloat(wordVolSlider.value));
                     }
                 });
                 document.removeEventListener('click', startAudio);
@@ -191,6 +202,12 @@ class WordGame {
 
     setMusicVolume(val) {
         this.soundGenerator.setBGMVolume(parseFloat(val));
+    }
+
+    setWordVolume(val) {
+        const volume = parseFloat(val);
+        this.audioPlayer.setVolume(volume);
+        localStorage.setItem('wordVolume', volume);
     }
 
     // 获取一个随机单词用于新方块

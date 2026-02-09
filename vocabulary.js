@@ -20,6 +20,14 @@ class AudioPlayer {
         this.currentAudio = null;
         this.enabled = true;
         this.audioCache = {};
+        this.volume = 1.0; // Default volume
+    }
+
+    setVolume(val) {
+        this.volume = Math.max(0, Math.min(1, parseFloat(val)));
+        if (this.currentAudio) {
+            this.currentAudio.volume = this.volume;
+        }
     }
 
     // 播放单词发音
@@ -35,13 +43,14 @@ class AudioPlayer {
         if (this.audioCache[path]) {
             this.currentAudio = this.audioCache[path];
             this.currentAudio.currentTime = 0;
+            this.currentAudio.volume = this.volume;
             this.currentAudio.play().catch(() => { });
             return;
         }
 
         // 创建新的Audio对象
         const audio = new Audio(path);
-        audio.volume = 0.8;
+        audio.volume = this.volume;
         this.audioCache[path] = audio;
         this.currentAudio = audio;
         audio.play().catch(() => {
@@ -58,6 +67,7 @@ class AudioPlayer {
             const utterance = new SpeechSynthesisUtterance(word);
             utterance.lang = 'en-US';
             utterance.rate = 0.8;
+            utterance.volume = this.volume;
             window.speechSynthesis.speak(utterance);
         }
     }

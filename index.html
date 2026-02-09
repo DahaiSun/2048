@@ -157,6 +157,12 @@
                         onchange="game.setMusicVolume(this.value)" oninput="game.setMusicVolume(this.value)"
                         title="音乐音量" style="width: 100%;">
                 </div>
+                <div class="setting-item">
+                    <label for="word-volume" style="display: block; margin-bottom: 5px; color: #34495e;">🗣️ 朗读音量</label>
+                    <input type="range" id="word-volume" min="0" max="1" step="0.1" value="1.0"
+                        onchange="game.setWordVolume(this.value)" oninput="game.setWordVolume(this.value)"
+                        title="朗读音量" style="width: 100%;">
+                </div>
             </div>
             <div class="modal-buttons">
                 <button onclick="this.parentElement.parentElement.parentElement.classList.remove('active')"

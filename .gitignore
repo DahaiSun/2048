@@ -12,6 +12,16 @@ venv/
 .venv/
 .env
 
+# Android
+android/.gradle/
+android/.idea/
+android/build/
+android/app/build/
+android/local.properties
+android/app/src/main/assets/www/
+*.hprof
+*.apk
+
 # OS generated
 .DS_Store
 Thumbs.db
