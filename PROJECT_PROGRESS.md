@@ -1,14 +1,14 @@
 # Word2048 Enhanced - 项目进度概览
 
-> 📅 最后更新：2025-06
+> 📅 最后更新：2025-02-11
 > 📦 仓库：[github.com/DahaiSun/2048](https://github.com/DahaiSun/2048)
-> 🏷️ 当前版本：v2.4 (Word Wrap)
+> 🏷️ 当前版本：v2.5 (Multi-Wordbook)
 
 ---
 
 ## 📋 项目简介
 
-Word2048 是一款基于经典 2048 玩法的英语单词学习游戏。玩家在合并方块的过程中学习牛津 5000 核心词汇（Oxford 5000），支持 CEFR A1-C1 五个难度等级，配有真人发音和中文翻译。
+Word2048 是一款基于经典 2048 玩法的英语单词学习游戏。内置 **23 本词书、8,385 个单词**，涵盖 Oxford 5000 核心词汇、12 个生活场景、8 个专题趣味词书及 CET-4/6 考试词汇，支持多词书自由切换、CEFR 分级选择，配有真人发音和中文翻译。
 
 ### 多平台支持
 
@@ -25,7 +25,8 @@ Word2048 是一款基于经典 2048 玩法的英语单词学习游戏。玩家�
 | 功能 | 描述 | 状态 |
 |------|------|------|
 | 2048 游戏核心 | 4×4 网格，经典合并玩法 | ✅ |
-| 词汇系统 | Oxford 5000 词汇，4929 个单词 | ✅ |
+| 词汇系统 | 23 本词书，8,385 个单词 | ✅ |
+| 多词书切换 | 4 大分类：综合/场景/专题/考试，自由选择 | ✅ |
 | CEFR 分级 | A1 / A2 / B1 / B2 / C1 多级选择 | ✅ |
 | 中文翻译 | 100% 单词覆盖翻译 | ✅ |
 | 单词发音 | WAV 音频 + 浏览器 TTS 兜底 | ✅ (95.2%) |
@@ -149,7 +150,10 @@ word2048-enhanced/
 
 | Commit | 描述 | 日期 |
 |--------|------|------|
-| `d627dfe` | 重命名 9 个音频 + 删除 32 个垃圾/合并文件 | 最新 |
+| `8741f6c` | 新增 8 个专题词书（科技/社媒/游戏/金融/营销/影视/医学/科学） | 最新 |
+| `f6059f4` | 多词书系统：词书注册中心 + 12 场景词书 + CET-4/6 考试词书 | |
+| `08dfa8a` | 新增项目进度文档 (PROJECT_PROGRESS.md) | |
+| `d627dfe` | 重命名 9 个音频 + 删除 32 个垃圾/合并文件 | |
 | `b95126b` | 修复损坏的音频文件名并更新词汇 JS | |
 | `7cc4b12` | 清洗 Oxford 5000 词汇数据 (修复 472 条异常) | |
 | `190c1b9` | 合并 Android 项目到统一仓库 | |
@@ -266,14 +270,23 @@ pip install pandas google-cloud-texttospeech
 ### 常用脚本
 
 ```bash
-# 清洗词汇数据并重新生成 JS
+# 清洗词汇数据并重新生成 oxford_vocabulary.js
 python words/clean_vocabulary.py
+
+# 生成场景词书 (12 本 → wordbooks/scene_*.js)
+python words/generate_scene_wordbooks.py
+
+# 生成专题词书 (8 本 → wordbooks/topic_*.js)
+python words/generate_topic_wordbooks.py
+
+# 生成 CET-4/6 考试词书 (2 本 → wordbooks/cet4/6_vocabulary.js)
+python words/generate_cet_wordbooks.py
 
 # 生成缺失的 TTS 音频
 python words/generate_tts.py
 
-# 修复音频文件名
-python words/fix_audio_step2.py
+# 验证所有词书加载
+node -e "global.WORDBOOK_REGISTRY={};global.registerWordbook=function(i,c){WORDBOOK_REGISTRY[i]=c};require('./oxford_vocabulary.js');require('fs').readdirSync('./wordbooks').filter(f=>f.endsWith('.js')).forEach(f=>require('./wordbooks/'+f));console.log(Object.keys(WORDBOOK_REGISTRY).length,'wordbooks loaded')"
 ```
 
 ---
@@ -282,11 +295,13 @@ python words/fix_audio_step2.py
 
 | 指标 | 数值 |
 |------|------|
-| 项目总大小 | 546 MB |
-| 代码文件 | ~55 KB (HTML+CSS+JS) |
+| 项目总大小 | ~550 MB |
+| 核心代码 | ~77 KB (HTML+CSS+JS) |
+| 词书数据 | ~600 KB (oxford_vocabulary.js + 22 个词书 JS) |
 | 音频文件 | 337 MB (4,803 WAV) |
-| 词汇总量 | 4,929 词 |
+| 词书总数 | 23 本（1 综合 + 12 场景 + 8 专题 + 2 考试） |
+| 词汇总量 | 8,385 词 |
 | 翻译覆盖率 | 100% |
-| 音频覆盖率 | 95.2% |
-| Git 提交数 | 12 |
+| 音频覆盖率 | Oxford 95.2% / 场景 ~85% / 专题 ~78% / CET ~68% |
+| Git 提交数 | 15 |
 | Android minSDK | 24 (Android 7.0+) |
