@@ -34,37 +34,117 @@ class WordGame {
     }
 
     initLevelSelector() {
-        const container = document.getElementById('level-selector');
-        if (!container) return;
-
-        // 从 localStorage 恢复上次选择
+        // 从 localStorage 恢复词书和等级选择
+        const savedBook = localStorage.getItem('wordGameActiveBook') || 'oxford_5000';
         const savedLevels = JSON.parse(localStorage.getItem('wordGameActiveLevels') || '["A1"]');
+
+        // 设置词书（不触发 refreshPool，因为还要设等级）
+        const books = this.vocabManager.getAvailableBooks();
+        if (books[savedBook]) {
+            this.vocabManager.activeBookId = savedBook;
+        }
+
+        // 设置等级
         this.vocabManager.setActiveLevels(savedLevels);
 
-        CEFR_LEVELS.forEach(level => {
-            const info = CEFR_INFO[level];
+        // 构建词书选择器 + 等级选择器
+        this.buildWordbookSelector();
+        this.buildLevelSelector();
+        this.updatePoolCount();
+    }
+
+    buildWordbookSelector() {
+        const container = document.getElementById('wordbook-selector');
+        if (!container) return;
+        container.innerHTML = '';
+
+        const books = this.vocabManager.getAvailableBooks();
+        const activeBookId = this.vocabManager.activeBookId;
+
+        // 按分组排序：general → scene → exam
+        const groupOrder = { general: 0, scene: 1, exam: 2 };
+        const sortedBooks = Object.entries(books).sort((a, b) => {
+            return (groupOrder[a[1].group] || 99) - (groupOrder[b[1].group] || 99);
+        });
+
+        // 分组渲染
+        let lastGroup = null;
+        sortedBooks.forEach(([id, book]) => {
+            // 分组标题
+            const groupLabels = { general: '📖 综合词书', scene: '🎯 场景词书', exam: '🎓 考试词书' };
+            if (book.group !== lastGroup) {
+                lastGroup = book.group;
+                const groupTitle = document.createElement('div');
+                groupTitle.className = 'wordbook-group-title';
+                groupTitle.textContent = groupLabels[book.group] || '其他';
+                container.appendChild(groupTitle);
+            }
+
+            const card = document.createElement('div');
+            card.className = 'wordbook-card' + (id === activeBookId ? ' active' : '');
+            card.dataset.bookId = id;
+            card.innerHTML = `
+                <span class="wordbook-emoji">${book.emoji || '📚'}</span>
+                <span class="wordbook-name">${book.name}</span>
+                <span class="wordbook-count">${book.totalWords}词</span>
+            `;
+            card.addEventListener('click', () => this.switchWordbook(id));
+            container.appendChild(card);
+        });
+    }
+
+    switchWordbook(bookId) {
+        this.vocabManager.setActiveBook(bookId);
+        localStorage.setItem('wordGameActiveBook', bookId);
+        localStorage.setItem('wordGameActiveLevels', JSON.stringify([...this.vocabManager.activeLevels]));
+
+        // 重建 UI
+        this.buildWordbookSelector();
+        this.buildLevelSelector();
+        this.updatePoolCount();
+
+        const book = this.vocabManager.getActiveBook();
+        this.showToast(`${book.emoji} ${book.name} (${this.vocabManager.getActiveWordCount()}词)`);
+    }
+
+    buildLevelSelector() {
+        const container = document.getElementById('level-selector');
+        if (!container) return;
+        container.innerHTML = '';
+
+        const levels = this.vocabManager.getBookLevels();
+        const activeBookId = this.vocabManager.activeBookId;
+
+        // 如果只有一个等级（如场景词书的 "all"），显示简要信息
+        if (levels.length === 1 && levels[0] === 'all') {
+            const info = document.createElement('div');
+            info.style.cssText = 'color: #7f8c8d; text-align: center; padding: 8px;';
+            info.textContent = '该词书为单级词书，已自动加载全部词汇';
+            container.appendChild(info);
+            return;
+        }
+
+        levels.forEach(levelId => {
+            const levelInfo = this.vocabManager.getBookLevelInfo(activeBookId, levelId);
             const btn = document.createElement('button');
             btn.className = 'level-btn';
-            btn.dataset.level = level;
-            btn.innerHTML = `${info.emoji} ${level}`;
-            btn.title = `${info.name} (${info.desc}) - ${this.vocabManager.getWordCount(level)}词`;
+            btn.dataset.level = levelId;
+            btn.innerHTML = levelInfo ? levelInfo.name : levelId;
+            btn.title = `${this.vocabManager.getWordCount(levelId)}词`;
 
-            if (this.vocabManager.activeLevels.includes(level)) {
+            if (this.vocabManager.activeLevels.includes(levelId)) {
                 btn.classList.add('active');
             }
 
-            btn.addEventListener('click', () => this.toggleLevel(level, btn));
+            btn.addEventListener('click', () => this.toggleLevel(levelId, btn));
             container.appendChild(btn);
         });
-
-        this.updatePoolCount();
     }
 
     toggleLevel(level, btn) {
         const currentLevels = [...this.vocabManager.activeLevels];
 
         if (currentLevels.includes(level)) {
-            // 不允许取消所有等级
             if (currentLevels.length <= 1) {
                 this.showToast('至少保留一个等级！');
                 return;
@@ -81,8 +161,7 @@ class WordGame {
         localStorage.setItem('wordGameActiveLevels', JSON.stringify(currentLevels));
         this.updatePoolCount();
 
-        // 显示提示
-        const activeNames = currentLevels.map(l => l).join('+');
+        const activeNames = currentLevels.join('+');
         this.showToast(`词池: ${activeNames} (${this.vocabManager.getActiveWordCount()}词)`);
     }
 

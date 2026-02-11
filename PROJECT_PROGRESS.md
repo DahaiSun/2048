@@ -86,7 +86,8 @@ word2048-enhanced/
 ├── index.html              # 主页面 (PWA 入口)
 ├── game.js                 # 游戏核心逻辑 (WordGame 类)
 ├── vocabulary.js           # 音频播放 + 词汇管理
-├── oxford_vocabulary.js    # 生成的词汇数据 (4,929 词)
+├── wordbook-registry.js    # 词书注册系统
+├── oxford_vocabulary.js    # Oxford 5000 词汇数据 (4,929 词)
 ├── styles.css              # 样式与动画
 ├── sw.js                   # Service Worker (离线缓存)
 ├── manifest.json           # PWA 配置
@@ -95,14 +96,29 @@ word2048-enhanced/
 ├── app.py                  # Python 桌面封装 (pywebview)
 ├── README.md               # 项目文档
 │
+├── wordbooks/              # 扩展词书数据
+│   ├── scene_food.js       # 🍔 食物饮料
+│   ├── scene_clothing.js   # 👕 服饰穿着
+│   ├── scene_home.js       # 🏠 家居房屋
+│   ├── scene_transport.js  # 🚗 交通出行
+│   ├── scene_health.js     # 🏥 健康身体
+│   ├── scene_shopping.js   # 🛒 购物消费
+│   ├── scene_nature.js     # 🌤️ 天气自然
+│   ├── scene_entertainment.js # 🎭 娱乐爱好
+│   ├── scene_travel.js     # ✈️ 旅行酒店
+│   ├── scene_work.js       # 💼 工作职场
+│   ├── scene_school.js     # 🏫 学校教育
+│   ├── scene_social.js     # 💬 社交情感
+│   ├── cet4_vocabulary.js  # 🎓 CET-4 四级
+│   └── cet6_vocabulary.js  # 🎓 CET-6 六级
+│
 ├── words/                  # 词汇数据与工具
 │   ├── oxford_5000_cleaned.csv       # 清洗后的词汇表
 │   ├── missing_audio.txt             # 缺失音频清单 (235 词)
 │   ├── clean_vocabulary.py           # CSV 清洗 + JS 生成脚本
-│   ├── fix_audio_filenames.py        # 音频文件名修复 (Step 1)
-│   ├── fix_audio_step2.py            # 音频清理 (Step 2)
+│   ├── generate_scene_wordbooks.py   # 场景词书生成脚本
+│   ├── generate_cet_wordbooks.py     # CET-4/6 词书生成脚本
 │   ├── generate_tts.py               # TTS 音频生成脚本
-│   ├── generate_vocabulary_js.py     # JS 生成脚本
 │   ├── requirements.txt              # Python 依赖
 │   └── tts_delivery/
 │       ├── words_manifest.json       # 音频索引
@@ -163,9 +179,55 @@ word2048-enhanced/
 ### 🟢 低优先级
 
 - [ ] Android 应用发布到 Google Play
-- [ ] 添加更多词汇集（如雅思/托福高频词）
 - [ ] 添加单词收藏/复习功能
 - [ ] 添加学习进度报告
+
+---
+
+## 📚 词书扩展路线图
+
+### 架构：多词书注册系统
+
+```
+wordbook-registry.js          词书注册中心
+     ↑ registerWordbook()
+     ├── oxford_vocabulary.js   📖 Oxford 5000 (A1-C1)
+     ├── wordbooks/scene_*.js   🎯 12 个场景词书
+     ├── wordbooks/cet4_*.js    🎓 四级词汇
+     ├── wordbooks/cet6_*.js    🎓 六级词汇
+     └── (未来可扩展更多)
+           ↓
+     vocabulary.js → VocabularyManager (多词书切换)
+           ↓
+     game.js → 词书选择UI + 等级选择UI
+```
+
+### 词书清单
+
+| 批次 | 词书 | 词数 | 分级方式 | 状态 |
+|------|------|------|----------|------|
+| **第一批** | 📖 Oxford 5000 | 4,929 | CEFR A1-C1 | ✅ 已有 |
+| **第一批** | 🍔 食物饮料 | ~150 | 单级 | 🔄 开发中 |
+| **第一批** | 👕 服饰穿着 | ~80 | 单级 | 🔄 开发中 |
+| **第一批** | 🏠 家居房屋 | ~120 | 单级 | 🔄 开发中 |
+| **第一批** | 🚗 交通出行 | ~100 | 单级 | 🔄 开发中 |
+| **第一批** | 🏥 健康身体 | ~150 | 单级 | 🔄 开发中 |
+| **第一批** | 🛒 购物消费 | ~80 | 单级 | 🔄 开发中 |
+| **第一批** | 🌤️ 天气自然 | ~100 | 单级 | 🔄 开发中 |
+| **第一批** | 🎭 娱乐爱好 | ~100 | 单级 | 🔄 开发中 |
+| **第一批** | ✈️ 旅行酒店 | ~100 | 单级 | 🔄 开发中 |
+| **第一批** | 💼 工作职场 | ~120 | 单级 | 🔄 开发中 |
+| **第一批** | 🏫 学校教育 | ~100 | 单级 | 🔄 开发中 |
+| **第一批** | 💬 社交情感 | ~100 | 单级 | 🔄 开发中 |
+| **第一批** | 🎓 CET-4 四级 | ~2,000 | 高频/核心 | 🔄 开发中 |
+| **第一批** | 🎓 CET-6 六级 | ~1,500 | 高频/核心 | 🔄 开发中 |
+| 第二批 | 🌍 雅思 IELTS | ~1,500 | 学术/生活 | 📋 计划中 |
+| 第二批 | 📖 托福 TOEFL | ~1,500 | 学术核心 | 📋 计划中 |
+| 第二批 | 🏫 中考词汇 | ~1,500 | 核心/拓展 | 📋 计划中 |
+| 第二批 | 🏫 高考词汇 | ~2,000 | 核心/拓展 | 📋 计划中 |
+| 第三批 | 💻 科技互联网 | ~200 | 单级 | 📋 计划中 |
+| 第三批 | 💰 商务金融 | ~200 | 单级 | 📋 计划中 |
+| 第三批 | 🐾 动物世界 | ~150 | 单级 | 📋 计划中 |
 
 ---
 

@@ -171,12 +171,15 @@
         </div>
     </div>
 
-    <!-- 难度选择弹窗 -->
+    <!-- 词书选择弹窗 -->
     <div class="modal" id="levels-modal">
         <div class="modal-content">
             <h2>📚 选择词书</h2>
+            <div class="wordbook-selector-wrap">
+                <div class="wordbook-selector" id="wordbook-selector"></div>
+            </div>
             <div class="level-selector-wrap" style="margin: 0; text-align: center;">
-                <p style="color: #7f8c8d; margin-bottom: 15px;">选择词汇等级（可多选）</p>
+                <p style="color: #7f8c8d; margin: 10px 0;">选择词汇等级（可多选）</p>
                 <div class="level-selector" id="level-selector" style="justify-content: center;"></div>
             </div>
             <div class="modal-buttons">
@@ -186,7 +189,27 @@
         </div>
     </div>
 
+    <!-- 词书注册系统 -->
+    <script src="wordbook-registry.js"></script>
+    <!-- Oxford 5000 基础词汇 -->
     <script src="oxford_vocabulary.js"></script>
+    <!-- 场景词书 -->
+    <script src="wordbooks/scene_food.js"></script>
+    <script src="wordbooks/scene_clothing.js"></script>
+    <script src="wordbooks/scene_home.js"></script>
+    <script src="wordbooks/scene_transport.js"></script>
+    <script src="wordbooks/scene_health.js"></script>
+    <script src="wordbooks/scene_shopping.js"></script>
+    <script src="wordbooks/scene_nature.js"></script>
+    <script src="wordbooks/scene_entertainment.js"></script>
+    <script src="wordbooks/scene_travel.js"></script>
+    <script src="wordbooks/scene_work.js"></script>
+    <script src="wordbooks/scene_school.js"></script>
+    <script src="wordbooks/scene_social.js"></script>
+    <!-- 考试词书 -->
+    <script src="wordbooks/cet4_vocabulary.js"></script>
+    <script src="wordbooks/cet6_vocabulary.js"></script>
+    <!-- 核心系统 -->
     <script src="vocabulary.js"></script>
     <script src="game.js"></script>
 </body>
