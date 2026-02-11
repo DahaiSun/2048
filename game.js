@@ -61,8 +61,8 @@ class WordGame {
         const books = this.vocabManager.getAvailableBooks();
         const activeBookId = this.vocabManager.activeBookId;
 
-        // 按分组排序：general → scene → exam
-        const groupOrder = { general: 0, scene: 1, exam: 2 };
+        // 按分组排序：general → scene → topic → exam
+        const groupOrder = { general: 0, scene: 1, topic: 2, exam: 3 };
         const sortedBooks = Object.entries(books).sort((a, b) => {
             return (groupOrder[a[1].group] || 99) - (groupOrder[b[1].group] || 99);
         });
@@ -71,7 +71,7 @@ class WordGame {
         let lastGroup = null;
         sortedBooks.forEach(([id, book]) => {
             // 分组标题
-            const groupLabels = { general: '📖 综合词书', scene: '🎯 场景词书', exam: '🎓 考试词书' };
+            const groupLabels = { general: '📖 综合词书', scene: '🎯 场景词书', topic: '🧩 专题词书', exam: '🎓 考试词书' };
             if (book.group !== lastGroup) {
                 lastGroup = book.group;
                 const groupTitle = document.createElement('div');
