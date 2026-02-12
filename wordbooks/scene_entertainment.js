@@ -15,7 +15,7 @@ registerWordbook('scene_entertainment', {
                 { word: "album", meaning: "专辑", audio: "album.wav" },
                 { word: "art", meaning: "艺术", audio: "art.wav" },
                 { word: "artist", meaning: "艺术家", audio: "artist.wav" },
-                { word: "athletics", meaning: "田径", audio: null },
+                { word: "athletics", meaning: "田径", audio: "athletics.wav" },
                 { word: "audience", meaning: "观众", audio: "audience.wav" },
                 { word: "ballet", meaning: "芭蕾舞", audio: "ballet.wav" },
                 { word: "band", meaning: "乐队", audio: "band.wav" },
@@ -28,7 +28,7 @@ registerWordbook('scene_entertainment', {
                 { word: "celebrate", meaning: "庆祝", audio: "celebrate.wav" },
                 { word: "champion", meaning: "冠军", audio: "champion.wav" },
                 { word: "channel", meaning: "渠道", audio: "channel.wav" },
-                { word: "chess", meaning: "国际象棋", audio: null },
+                { word: "chess", meaning: "国际象棋", audio: "chess.wav" },
                 { word: "cinema", meaning: "电影", audio: "cinema.wav" },
                 { word: "climb", meaning: "爬", audio: "climb.wav" },
                 { word: "club", meaning: "俱乐部", audio: "club.wav" },
@@ -94,9 +94,9 @@ registerWordbook('scene_entertainment', {
                 { word: "poetry", meaning: "诗", audio: "poetry.wav" },
                 { word: "pool", meaning: "水池", audio: "pool.wav" },
                 { word: "race", meaning: "种族", audio: "race.wav" },
-                { word: "recreation", meaning: "娱乐", audio: null },
+                { word: "recreation", meaning: "娱乐", audio: "recreation.wav" },
                 { word: "record", meaning: "记录", audio: "record.wav" },
-                { word: "rehearsal", meaning: "排练", audio: null },
+                { word: "rehearsal", meaning: "排练", audio: "rehearsal.wav" },
                 { word: "relax", meaning: "放松", audio: "relax.wav" },
                 { word: "rhythm", meaning: "韵律", audio: "rhythm.wav" },
                 { word: "rock", meaning: "岩石", audio: "rock.wav" },
@@ -118,7 +118,7 @@ registerWordbook('scene_entertainment', {
                 { word: "stage", meaning: "阶段", audio: "stage.wav" },
                 { word: "star", meaning: "星星", audio: "star.wav" },
                 { word: "studio", meaning: "工作室", audio: "studio.wav" },
-                { word: "surf", meaning: "冲浪", audio: null },
+                { word: "surf", meaning: "冲浪", audio: "surf.wav" },
                 { word: "swim", meaning: "游泳", audio: "swim.wav" },
                 { word: "team", meaning: "团队", audio: "team.wav" },
                 { word: "tennis", meaning: "网球", audio: "tennis.wav" },
@@ -126,8 +126,8 @@ registerWordbook('scene_entertainment', {
                 { word: "tour", meaning: "旅游", audio: "tour.wav" },
                 { word: "tournament", meaning: "比赛", audio: "tournament.wav" },
                 { word: "video", meaning: "视频", audio: "video.wav" },
-                { word: "volleyball", meaning: "排球", audio: null },
-                { word: "yoga", meaning: "瑜伽", audio: null }
+                { word: "volleyball", meaning: "排球", audio: "volleyball.wav" },
+                { word: "yoga", meaning: "瑜伽", audio: "yoga.wav" }
             ]
         }
     }

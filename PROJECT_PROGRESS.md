@@ -1,6 +1,6 @@
 # Word2048 Enhanced - 项目进度概览
 
-> 📅 最后更新：2025-02-11
+> 📅 最后更新：2025-02-12
 > 📦 仓库：[github.com/DahaiSun/2048](https://github.com/DahaiSun/2048)
 > 🏷️ 当前版本：v2.5 (Multi-Wordbook)
 
@@ -29,7 +29,7 @@ Word2048 是一款基于经典 2048 玩法的英语单词学习游戏。内置 *
 | 多词书切换 | 4 大分类：综合/场景/专题/考试，自由选择 | ✅ |
 | CEFR 分级 | A1 / A2 / B1 / B2 / C1 多级选择 | ✅ |
 | 中文翻译 | 100% 单词覆盖翻译 | ✅ |
-| 单词发音 | WAV 音频 + 浏览器 TTS 兜底 | ✅ (95.2%) |
+| 单词发音 | WAV 音频 + 浏览器 TTS 兜底 | ✅ (100%) |
 | 背景音乐 | BGM 播放与音量控制 | ✅ |
 | 朗读音量 | 独立的单词发音音量控制 | ✅ |
 | 音效反馈 | 合并/移动/胜利/结束 Web Audio 音效 | ✅ |
@@ -49,12 +49,12 @@ Word2048 是一款基于经典 2048 玩法的英语单词学习游戏。内置 *
 
 | 等级 | 单词数 | 有音频 | 有翻译 | 音频覆盖率 |
 |------|--------|--------|--------|------------|
-| A1 | 890 | 882 | 890 | 99.1% |
-| A2 | 789 | 782 | 789 | 99.1% |
-| B1 | 688 | 680 | 688 | 98.8% |
-| B2 | 1,289 | 1,277 | 1,289 | 99.1% |
-| C1 | 1,273 | 1,073 | 1,273 | 84.3% |
-| **合计** | **4,929** | **4,694** | **4,929** | **95.2%** |
+| A1 | 890 | 890 | 890 | 100% |
+| A2 | 789 | 789 | 789 | 100% |
+| B1 | 688 | 688 | 688 | 100% |
+| B2 | 1,289 | 1,289 | 1,289 | 100% |
+| C1 | 1,273 | 1,273 | 1,273 | 100% |
+| **合计** | **4,929** | **4,929** | **4,929** | **100%** |
 
 ### 数据流水线
 
@@ -71,9 +71,9 @@ oxford_vocabulary.js (供游戏使用)
 ### 音频系统
 
 ```
-Google Cloud TTS API
-    ↓ (generate_tts.py 批量生成)
-words/tts_delivery/audio/*.wav (4,803 个文件，337 MB)
+Google Cloud TTS API (Chirp 3 HD - Zephyr)
+    ↓ (generate_tts.py / generate_missing_audio.py 批量生成)
+words/tts_delivery/audio/*.wav (5,644 个文件，393 MB)
     ↓ (vocabulary.js AudioPlayer 播放)
 浏览器 Web Audio API  →  若无文件则 SpeechSynthesis TTS 兜底
 ```
@@ -123,7 +123,9 @@ word2048-enhanced/
 │
 ├── words/                  # 词汇数据与工具
 │   ├── oxford_5000_cleaned.csv       # 清洗后的词汇表
-│   ├── missing_audio.txt             # 缺失音频清单 (235 词)
+│   ├── missing_audio.txt             # 原始缺失音频清单 (已补全)
+│   ├── all_missing_audio.txt         # 全词书缺失音频清单 (已补全)
+│   ├── generate_missing_audio.py     # 缺失音频批量生成脚本
 │   ├── clean_vocabulary.py           # CSV 清洗 + JS 生成脚本
 │   ├── generate_scene_wordbooks.py   # 场景词书生成脚本
 │   ├── generate_cet_wordbooks.py     # CET-4/6 词书生成脚本
@@ -132,7 +134,7 @@ word2048-enhanced/
 │   ├── requirements.txt              # Python 依赖
 │   └── tts_delivery/
 │       ├── words_manifest.json       # 音频索引
-│       └── audio/                    # WAV 音频文件 (4,803 个)
+│       └── audio/                    # WAV 音频文件 (5,644 个)
 │
 └── android/                # Android 原生应用
     ├── build.gradle.kts
@@ -170,17 +172,9 @@ word2048-enhanced/
 
 ## ⚠️ 待办事项
 
-### 🔴 高优先级
+### ✅ 已完成
 
-- [ ] **补充 235 个缺失音频**
-  清单见 `words/missing_audio.txt`，按 CEFR 等级分布：
-  - A1: 8 词 (bathroom, cannot, dad, front, ice, machine, Saturday, statement)
-  - A2: 5 词 (anybody, brilliant, education, immediately, opportunity, safe, towel)
-  - B1: 6 词 (bite, dust, fixed, immediate, perfectly, queue, sensible, various)
-  - B2: 12 词 (angle, beneficial, chief, conservation, distinct, hearing, hip, litter, overcome, shadow, spill, therapy)
-  - C1: ~204 词 (占缺失总量 87%)
-
-  > 解决方案：使用 `generate_tts.py` 配合 Google Cloud TTS API 批量生成
+- [x] **补充 841 个缺失音频** — 使用 `generate_missing_audio.py` + Google Cloud TTS Chirp 3 HD 批量生成，全部 23 本词书音频覆盖率达到 **100%**
 
 ### 🟡 中优先级
 
@@ -282,8 +276,11 @@ python words/generate_topic_wordbooks.py
 # 生成 CET-4/6 考试词书 (2 本 → wordbooks/cet4/6_vocabulary.js)
 python words/generate_cet_wordbooks.py
 
-# 生成缺失的 TTS 音频
+# 生成全量 TTS 音频 (Oxford 5000)
 python words/generate_tts.py
+
+# 补充缺失音频 (扫描所有词书，只生成缺失的)
+python words/generate_missing_audio.py
 
 # 验证所有词书加载
 node -e "global.WORDBOOK_REGISTRY={};global.registerWordbook=function(i,c){WORDBOOK_REGISTRY[i]=c};require('./oxford_vocabulary.js');require('fs').readdirSync('./wordbooks').filter(f=>f.endsWith('.js')).forEach(f=>require('./wordbooks/'+f));console.log(Object.keys(WORDBOOK_REGISTRY).length,'wordbooks loaded')"
@@ -295,13 +292,13 @@ node -e "global.WORDBOOK_REGISTRY={};global.registerWordbook=function(i,c){WORDB
 
 | 指标 | 数值 |
 |------|------|
-| 项目总大小 | ~550 MB |
+| 项目总大小 | ~600 MB |
 | 核心代码 | ~77 KB (HTML+CSS+JS) |
 | 词书数据 | ~600 KB (oxford_vocabulary.js + 22 个词书 JS) |
-| 音频文件 | 337 MB (4,803 WAV) |
+| 音频文件 | 393 MB (5,644 WAV) |
 | 词书总数 | 23 本（1 综合 + 12 场景 + 8 专题 + 2 考试） |
 | 词汇总量 | 8,385 词 |
 | 翻译覆盖率 | 100% |
-| 音频覆盖率 | Oxford 95.2% / 场景 ~85% / 专题 ~78% / CET ~68% |
-| Git 提交数 | 15 |
+| 音频覆盖率 | 100%（全部词书） |
+| Git 提交数 | 16 |
 | Android minSDK | 24 (Android 7.0+) |
