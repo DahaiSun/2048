@@ -19,7 +19,7 @@ registerWordbook('topic_social_media', {
                 { word: "blog", meaning: "博客", audio: "blog.wav" },
                 { word: "bookmark", meaning: "书签", audio: "bookmark.wav" },
                 { word: "bot", meaning: "机器人", audio: "bot.wav" },
-                { word: "caption", meaning: "字幕", audio: "caption.wav" },
+                { word: "caption", meaning: "描述文字", audio: "caption.wav" },
                 { word: "celebrity", meaning: "名人", audio: "celebrity.wav" },
                 { word: "censor", meaning: "审查", audio: "censor.wav" },
                 { word: "channel", meaning: "渠道", audio: "channel.wav" },

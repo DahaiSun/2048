@@ -1,14 +1,14 @@
 # Word2048 Enhanced - 项目进度概览
 
-> 📅 最后更新：2025-02-12
+> 📅 最后更新：2026-02-14
 > 📦 仓库：[github.com/DahaiSun/2048](https://github.com/DahaiSun/2048)
-> 🏷️ 当前版本：v2.5 (Multi-Wordbook)
+> 🏷️ 当前版本：v2.8 (19 Scene + 17 Topic Wordbooks, 100% Audio)
 
 ---
 
 ## 📋 项目简介
 
-Word2048 是一款基于经典 2048 玩法的英语单词学习游戏。内置 **23 本词书、8,385 个单词**，涵盖 Oxford 5000 核心词汇、12 个生活场景、8 个专题趣味词书及 CET-4/6 考试词汇，支持多词书自由切换、CEFR 分级选择，配有真人发音和中文翻译。
+Word2048 是一款基于经典 2048 玩法的英语单词学习游戏。内置 **39 本词书、覆盖 5,999 个唯一单词**（各词书合计 10,563 词次），涵盖 Oxford 5000 核心词汇、19 个生活场景、17 个专题趣味词书及 CET-4/6 考试词汇，支持多词书自由切换、CEFR 分级选择，配有真人发音和中文翻译。
 
 ### 多平台支持
 
@@ -25,7 +25,7 @@ Word2048 是一款基于经典 2048 玩法的英语单词学习游戏。内置 *
 | 功能 | 描述 | 状态 |
 |------|------|------|
 | 2048 游戏核心 | 4×4 网格，经典合并玩法 | ✅ |
-| 词汇系统 | 23 本词书，8,385 个单词 | ✅ |
+| 词汇系统 | 39 本词书，5,999 个唯一单词 | ✅ |
 | 多词书切换 | 4 大分类：综合/场景/专题/考试，自由选择 | ✅ |
 | CEFR 分级 | A1 / A2 / B1 / B2 / C1 多级选择 | ✅ |
 | 中文翻译 | 100% 单词覆盖翻译 | ✅ |
@@ -110,6 +110,13 @@ word2048-enhanced/
 │   ├── scene_work.js       # 💼 工作职场
 │   ├── scene_school.js     # 🏫 学校教育
 │   ├── scene_social.js     # 💬 社交情感
+│   ├── scene_fitness.js    # 🏋️ 运动健身
+│   ├── scene_music.js      # 🎵 音乐乐器
+│   ├── scene_animals.js    # 🐾 宠物动物
+│   ├── scene_plants.js     # 🌿 植物花卉
+│   ├── scene_festivals.js  # 🎄 节日文化
+│   ├── scene_cooking.js    # 🍳 烹饪厨房
+│   ├── scene_law.js        # ⚖️ 法律法规
 │   ├── topic_tech.js       # 💻 科技互联网
 │   ├── topic_social_media.js # 📱 社交媒体
 │   ├── topic_gaming.js     # 🎮 游戏电竞
@@ -118,6 +125,15 @@ word2048-enhanced/
 │   ├── topic_film.js       # 🎬 电影影视
 │   ├── topic_medical.js    # 🏥 医学用语
 │   ├── topic_science.js    # 🔬 科学实验
+│   ├── topic_space.js      # 🚀 太空航天
+│   ├── topic_art.js        # 🎨 艺术设计
+│   ├── topic_politics.js   # 🏛️ 政治外交
+│   ├── topic_math.js       # 📐 数学逻辑
+│   ├── topic_environment.js # 🌍 环保生态
+│   ├── topic_psychology.js # 🧠 心理学
+│   ├── topic_sports.js     # ⚽ 体育赛事
+│   ├── topic_architecture.js # 🏗️ 建筑工程
+│   ├── topic_ai.js         # 🤖 人工智能
 │   ├── cet4_vocabulary.js  # 🎓 CET-4 四级
 │   └── cet6_vocabulary.js  # 🎓 CET-6 六级
 │
@@ -152,7 +168,10 @@ word2048-enhanced/
 
 | Commit | 描述 | 日期 |
 |--------|------|------|
-| `8741f6c` | 新增 8 个专题词书（科技/社媒/游戏/金融/营销/影视/医学/科学） | 最新 |
+| *(pending)* | 生成 465 个缺失音频，全部 39 本词书音频覆盖率 100% (v2.8) | 最新 |
+| `42ebc53` | 生成 841 个缺失音频，23 本词书音频覆盖率 100% | 2026-02-12 |
+| `3e585bf` | 更新 PROJECT_PROGRESS.md | |
+| `8741f6c` | 新增 8 个专题词书（科技/社媒/游戏/金融/营销/影视/医学/科学） | |
 | `f6059f4` | 多词书系统：词书注册中心 + 12 场景词书 + CET-4/6 考试词书 | |
 | `08dfa8a` | 新增项目进度文档 (PROJECT_PROGRESS.md) | |
 | `d627dfe` | 重命名 9 个音频 + 删除 32 个垃圾/合并文件 | |
@@ -175,6 +194,7 @@ word2048-enhanced/
 ### ✅ 已完成
 
 - [x] **补充 841 个缺失音频** — 使用 `generate_missing_audio.py` + Google Cloud TTS Chirp 3 HD 批量生成，全部 23 本词书音频覆盖率达到 **100%**
+- [x] **补充 465 个新词书缺失音频** — 第三批 9 个专题词书 + 第四批 7 个场景词书，使用 `generate_missing_audio.py` + Google Cloud TTS Chirp 3 HD 批量生成，全部 39 本词书音频覆盖率达到 **100%**（2026-02-14）
 
 ### 🟡 中优先级
 
@@ -199,8 +219,8 @@ word2048-enhanced/
 wordbook-registry.js          词书注册中心
      ↑ registerWordbook()
      ├── oxford_vocabulary.js   📖 Oxford 5000 (A1-C1)
-     ├── wordbooks/scene_*.js   🎯 12 个场景词书
-     ├── wordbooks/topic_*.js   🧩 8 个专题词书
+     ├── wordbooks/scene_*.js   🎯 19 个场景词书
+     ├── wordbooks/topic_*.js   🧩 17 个专题词书
      ├── wordbooks/cet4_*.js    🎓 四级词汇
      ├── wordbooks/cet6_*.js    🎓 六级词汇
      └── (未来可扩展更多)
@@ -227,6 +247,13 @@ wordbook-registry.js          词书注册中心
 | **第一批** | 💼 工作职场 | 117 | 单级 | ✅ 完成 |
 | **第一批** | 🏫 学校教育 | 106 | 单级 | ✅ 完成 |
 | **第一批** | 💬 社交情感 | 132 | 单级 | ✅ 完成 |
+| **第四批** | 🏋️ 运动健身 | 144 | 单级 | ✅ 完成 |
+| **第四批** | 🎵 音乐乐器 | 124 | 单级 | ✅ 完成 |
+| **第四批** | 🐾 宠物动物 | 138 | 单级 | ✅ 完成 |
+| **第四批** | 🌿 植物花卉 | 117 | 单级 | ✅ 完成 |
+| **第四批** | 🎄 节日文化 | 121 | 单级 | ✅ 完成 |
+| **第四批** | 🍳 烹饪厨房 | 145 | 单级 | ✅ 完成 |
+| **第四批** | ⚖️ 法律法规 | 145 | 单级 | ✅ 完成 |
 | **第一批** | 🎓 CET-4 四级 | 542 | 高频/核心 | ✅ 完成 |
 | **第一批** | 🎓 CET-6 六级 | 370 | 高频/核心 | ✅ 完成 |
 | **第二批** | 💻 科技互联网 | 154 | 单级 | ✅ 完成 |
@@ -237,11 +264,19 @@ wordbook-registry.js          词书注册中心
 | **第二批** | 🎬 电影影视 | 170 | 单级 | ✅ 完成 |
 | **第二批** | 🏥 医学用语 | 153 | 单级 | ✅ 完成 |
 | **第二批** | 🔬 科学实验 | 216 | 单级 | ✅ 完成 |
-| 第三批 | 🌍 雅思 IELTS | ~1,500 | 学术/生活 | 📋 计划中 |
-| 第三批 | 📖 托福 TOEFL | ~1,500 | 学术核心 | 📋 计划中 |
-| 第三批 | 🏫 中考词汇 | ~1,500 | 核心/拓展 | 📋 计划中 |
-| 第三批 | 🏫 高考词汇 | ~2,000 | 核心/拓展 | 📋 计划中 |
-| 第三批 | 🐾 动物世界 | ~150 | 单级 | 📋 计划中 |
+| **第三批** | 🚀 太空航天 | 132 | 单级 | ✅ 完成 |
+| **第三批** | 🎨 艺术设计 | 124 | 单级 | ✅ 完成 |
+| **第三批** | 🏛️ 政治外交 | 127 | 单级 | ✅ 完成 |
+| **第三批** | 📐 数学逻辑 | 135 | 单级 | ✅ 完成 |
+| **第三批** | 🌍 环保生态 | 124 | 单级 | ✅ 完成 |
+| **第三批** | 🧠 心理学 | 155 | 单级 | ✅ 完成 |
+| **第三批** | ⚽ 体育赛事 | 130 | 单级 | ✅ 完成 |
+| **第三批** | 🏗️ 建筑工程 | 156 | 单级 | ✅ 完成 |
+| **第三批** | 🤖 人工智能 | 161 | 单级 | ✅ 完成 |
+| 第五批 | 🌍 雅思 IELTS | ~1,500 | 学术/生活 | 📋 计划中 |
+| 第五批 | 📖 托福 TOEFL | ~1,500 | 学术核心 | 📋 计划中 |
+| 第五批 | 🏫 中考词汇 | ~1,500 | 核心/拓展 | 📋 计划中 |
+| 第五批 | 🏫 高考词汇 | ~2,000 | 核心/拓展 | 📋 计划中 |
 
 ---
 
@@ -267,10 +302,10 @@ pip install pandas google-cloud-texttospeech
 # 清洗词汇数据并重新生成 oxford_vocabulary.js
 python words/clean_vocabulary.py
 
-# 生成场景词书 (12 本 → wordbooks/scene_*.js)
+# 生成场景词书 (19 本 → wordbooks/scene_*.js)
 python words/generate_scene_wordbooks.py
 
-# 生成专题词书 (8 本 → wordbooks/topic_*.js)
+# 生成专题词书 (17 本 → wordbooks/topic_*.js)
 python words/generate_topic_wordbooks.py
 
 # 生成 CET-4/6 考试词书 (2 本 → wordbooks/cet4/6_vocabulary.js)
@@ -288,17 +323,88 @@ node -e "global.WORDBOOK_REGISTRY={};global.registerWordbook=function(i,c){WORDB
 
 ---
 
+## 🔊 音频生成指南 (Google Cloud TTS)
+
+新增词书后，部分单词可能缺少 WAV 音频文件。使用以下流程补充：
+
+### 前置条件
+
+1. **Google Cloud 项目**：已启用 Text-to-Speech API，已开通计费
+2. **认证**：运行 `gcloud auth application-default login`（或设置 `GOOGLE_APPLICATION_CREDENTIALS` 环境变量）
+3. **Python 依赖**：`pip install pandas google-cloud-texttospeech`
+
+### 步骤 1：扫描缺失音频
+
+```bash
+node -e "
+global.WORDBOOK_REGISTRY={};
+global.registerWordbook=function(i,c){WORDBOOK_REGISTRY[i]=c};
+require('./oxford_vocabulary.js');
+var fs=require('fs');
+fs.readdirSync('./wordbooks').filter(f=>f.endsWith('.js')).forEach(f=>require('./wordbooks/'+f));
+var audioDir='words/tts_delivery/audio';
+var audioFiles=new Set(fs.readdirSync(audioDir).map(f=>f.replace('.wav','')));
+var allMissing=new Set();
+Object.keys(WORDBOOK_REGISTRY).forEach(id=>{
+  var wb=WORDBOOK_REGISTRY[id];
+  Object.keys(wb.levels).forEach(lv=>{
+    wb.levels[lv].words.forEach(w=>{
+      if(audioFiles.has(w.word)===false) allMissing.add(w.word);
+    });
+  });
+});
+console.log(Array.from(allMissing).sort().join('\n'));
+" > words/all_missing_audio.txt
+```
+
+### 步骤 2：批量生成音频
+
+```bash
+# 先预览要生成的单词列表
+python words/generate_missing_audio.py --dry-run
+
+# 确认无误后执行生成
+python words/generate_missing_audio.py
+```
+
+### 步骤 3：重新生成词书 JS（更新音频引用）
+
+```bash
+python words/generate_topic_wordbooks.py
+python words/generate_scene_wordbooks.py
+```
+
+### TTS 配置
+
+| 参数 | 值 |
+|------|-----|
+| API | Google Cloud Text-to-Speech |
+| 声音模型 | `en-US-Chirp3-HD-Zephyr` |
+| 语言 | `en-US` |
+| 输出格式 | WAV (LINEAR16) |
+| SSML 尾部填充 | `<break time="300ms"/>` 防止音频截断 |
+| 项目 ID | 在 `generate_missing_audio.py` 中配置 `GOOGLE_CLOUD_PROJECT_ID` |
+| 输出目录 | `words/tts_delivery/audio/` |
+
+### 常见问题
+
+- **Quota exceeded / API not enabled**：在 `client_options` 中显式传入 `quota_project_id`（脚本已内置）
+- **音频截断**：使用 SSML `<break time="300ms"/>` 尾部填充（脚本已内置）
+- **部分失败**：失败的单词会自动保存到 `words/tts_failed.txt`，可重新运行脚本补充
+
+---
+
 ## 📈 项目统计
 
 | 指标 | 数值 |
 |------|------|
 | 项目总大小 | ~600 MB |
 | 核心代码 | ~77 KB (HTML+CSS+JS) |
-| 词书数据 | ~600 KB (oxford_vocabulary.js + 22 个词书 JS) |
-| 音频文件 | 393 MB (5,644 WAV) |
-| 词书总数 | 23 本（1 综合 + 12 场景 + 8 专题 + 2 考试） |
-| 词汇总量 | 8,385 词 |
+| 词书数据 | ~1 MB (oxford_vocabulary.js + 38 个词书 JS) |
+| 音频文件 | ~420 MB (6,107 WAV) |
+| 词书总数 | 39 本（1 综合 + 19 场景 + 17 专题 + 2 考试） |
+| 唯一词汇量 | 5,999 词（各词书合计 10,563 词次） |
 | 翻译覆盖率 | 100% |
-| 音频覆盖率 | 100%（全部词书） |
-| Git 提交数 | 16 |
+| 音频覆盖率 | 100%（全部 39 本词书） |
+| Git 提交数 | 16+ |
 | Android minSDK | 24 (Android 7.0+) |

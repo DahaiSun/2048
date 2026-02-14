@@ -95,7 +95,7 @@ registerWordbook('topic_marketing', {
                 { word: "market", meaning: "市场", audio: "market.wav" },
                 { word: "media", meaning: "媒体", audio: "media.wav" },
                 { word: "merchandise", meaning: "商品", audio: "merchandise.wav" },
-                { word: "metric", meaning: "指标", audio: "metric.wav" },
+                { word: "metric", meaning: "评价指标", audio: "metric.wav" },
                 { word: "motto", meaning: "广告语", audio: "motto.wav" },
                 { word: "negotiate", meaning: "谈判", audio: "negotiate.wav" },
                 { word: "network", meaning: "网络", audio: "network.wav" },

@@ -25,7 +25,7 @@ registerWordbook('topic_film', {
                 { word: "blockbuster", meaning: "大片", audio: "blockbuster.wav" },
                 { word: "broadcast", meaning: "播送", audio: "broadcast.wav" },
                 { word: "camera", meaning: "相机", audio: "camera.wav" },
-                { word: "caption", meaning: "字幕", audio: "caption.wav" },
+                { word: "caption", meaning: "描述文字", audio: "caption.wav" },
                 { word: "cast", meaning: "投掷", audio: "cast.wav" },
                 { word: "celebrity", meaning: "名人", audio: "celebrity.wav" },
                 { word: "chapter", meaning: "章", audio: "chapter.wav" },
