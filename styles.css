@@ -19,15 +19,15 @@ body {
 
 .header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     width: 100%;
     max-width: 500px;
 }
 
 h1 {
     color: #776e65;
-    font-size: 2.5em;
-    margin-bottom: 10px;
+    font-size: 2.2em;
+    margin-bottom: 6px;
     animation: fadeInDown 0.5s ease-out;
 }
 
@@ -247,21 +247,22 @@ h1 {
    ============================ */
 .controls {
     display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+    flex-wrap: nowrap;
     justify-content: center;
 }
 
 button {
     border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 0.95em;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 0.82em;
     cursor: pointer;
     transition: all 0.2s;
     font-weight: 700;
     box-shadow: none;
+    white-space: nowrap;
 }
 
 button:hover {
@@ -973,8 +974,8 @@ button:active {
     }
 
     h1 {
-        font-size: 1.8em;
-        margin-bottom: 5px;
+        font-size: 1.6em;
+        margin-bottom: 4px;
     }
 
     .subtitle {
@@ -1019,21 +1020,20 @@ button:active {
         border-width: 1px;
     }
 
-    /* 按钮保持横向排列，自动换行，不要垂直堆叠 */
+    /* 按钮一行四个，紧凑排列 */
     .controls {
         flex-direction: row;
-        gap: 8px;
-        margin-bottom: 10px;
+        flex-wrap: nowrap;
+        gap: 5px;
+        margin-bottom: 8px;
     }
 
     button {
         width: auto;
         flex: 1;
-        /* 让按钮平分宽度 */
-        min-width: 45%;
-        /* 一行放两个 */
-        padding: 8px 10px;
-        font-size: 0.9em;
+        padding: 6px 4px;
+        font-size: 0.75em;
+        min-width: 0;
     }
 
     /* 音量条调整 */
