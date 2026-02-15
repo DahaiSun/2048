@@ -233,6 +233,7 @@ class VocabularyManager {
         this.activeLevels = ['A1'];         // 默认等级
         this.wordPool = [];                 // 当前活跃的词池
         this.usedWords = new Set();         // 已使用的单词（避免短期重复）
+        this._unusedQueue = [];             // 洗牌队列：优先出未出现过的单词
 
         // 向后兼容：如果注册表为空，用旧的 OXFORD_VOCABULARY
         this._legacyWords = typeof OXFORD_VOCABULARY !== 'undefined' ? OXFORD_VOCABULARY : {};
@@ -311,8 +312,9 @@ class VocabularyManager {
             });
         }
 
-        // 洗牌
+        // 洗牌 & 初始化未使用队列
         this.shuffle(this.wordPool);
+        this._unusedQueue = [...this.wordPool];
         this.usedWords.clear();
     }
 
@@ -332,25 +334,17 @@ class VocabularyManager {
         this.refreshPool();
     }
 
-    // 获取随机单词
+    // 获取随机单词（优先返回未出现过的单词，全部出完后重新洗牌）
     getRandomWord() {
         if (this.wordPool.length === 0) return null;
 
-        // 如果大部分单词都用过了，重置
-        if (this.usedWords.size >= this.wordPool.length * 0.8) {
-            this.usedWords.clear();
+        // 队列为空 → 所有单词都出过一遍，重新洗牌
+        if (this._unusedQueue.length === 0) {
+            this._unusedQueue = [...this.wordPool];
+            this.shuffle(this._unusedQueue);
         }
 
-        // 找一个没用过的
-        let attempts = 0;
-        let word;
-        do {
-            word = this.wordPool[Math.floor(Math.random() * this.wordPool.length)];
-            attempts++;
-        } while (this.usedWords.has(word.word) && attempts < 50);
-
-        this.usedWords.add(word.word);
-        return word;
+        return this._unusedQueue.pop();
     }
 
     // 获取指定等级的单词数量

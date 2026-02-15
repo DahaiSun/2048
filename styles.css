@@ -97,17 +97,16 @@ h1 {
 }
 
 .wordbook-selector {
-    max-height: 260px;
+    max-height: 50vh;
     overflow-y: auto;
-    padding: 4px;
+    padding: 2px;
 }
 
 .wordbook-group-title {
-    font-size: 0.8em;
+    font-size: 0.75em;
     font-weight: 700;
     color: #7f8c8d;
-    padding: 8px 6px 4px;
-    text-transform: uppercase;
+    padding: 8px 6px 3px;
     letter-spacing: 0.5px;
 }
 
@@ -115,55 +114,75 @@ h1 {
     padding-top: 0;
 }
 
+.wordbook-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+}
+
+/* ---- 每个词书独立配色（通过 --hue CSS 变量） ---- */
 .wordbook-card {
+    --hue: 210;
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 12px;
-    margin: 4px 0;
-    border-radius: 10px;
-    background: #f8f9fa;
-    border: 2px solid transparent;
+    gap: 4px;
+    padding: 5px 6px;
+    border-radius: 8px;
+    border: 2px solid hsl(var(--hue) 40% 88%);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.15s;
+    min-width: 0;
+    background: linear-gradient(135deg,
+        hsl(var(--hue) 55% 94%),
+        hsl(var(--hue) 45% 89%));
 }
 
 .wordbook-card:hover {
-    background: #ecf0f1;
-    transform: translateX(3px);
+    background: linear-gradient(135deg,
+        hsl(var(--hue) 60% 89%),
+        hsl(var(--hue) 50% 84%));
+    border-color: hsl(var(--hue) 50% 78%);
 }
 
 .wordbook-card.active {
-    background: linear-gradient(135deg, #ebf5fb, #d6eaf8);
-    border-color: #3498db;
-    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+    background: linear-gradient(135deg,
+        hsl(var(--hue) 65% 83%),
+        hsl(var(--hue) 55% 76%));
+    border-color: hsl(var(--hue) 60% 50%);
+    box-shadow: 0 2px 8px hsl(var(--hue) 60% 50% / 0.3);
 }
 
 .wordbook-emoji {
-    font-size: 1.3em;
+    font-size: 1em;
     flex-shrink: 0;
 }
 
 .wordbook-name {
-    font-size: 0.9em;
+    font-size: 0.78em;
     font-weight: 600;
-    color: #2c3e50;
+    color: hsl(var(--hue) 25% 28%);
     flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wordbook-card.active .wordbook-name {
+    color: hsl(var(--hue) 45% 18%);
+    font-weight: 700;
 }
 
 .wordbook-count {
-    font-size: 0.75em;
-    color: #95a5a6;
-    font-weight: 500;
-    background: #ecf0f1;
-    padding: 2px 8px;
-    border-radius: 10px;
+    font-size: 0.65em;
+    font-weight: 600;
     flex-shrink: 0;
+    color: hsl(var(--hue) 40% 55%);
 }
 
 .wordbook-card.active .wordbook-count {
-    background: #3498db;
-    color: white;
+    color: hsl(var(--hue) 55% 38%);
+    font-weight: 700;
 }
 
 /* Wordbook selector scrollbar */
@@ -767,6 +786,55 @@ button:active {
     color: #ffd700;
     font-weight: 900;
     box-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
+}
+
+/* "all" 级别 - 场景/专题词书（通过 --hue CSS 变量着色）*/
+.tile-cefr-all-1 {
+    --hue: 210;
+    background: linear-gradient(135deg, hsl(var(--hue) 60% 92%), hsl(var(--hue) 50% 85%));
+    color: hsl(var(--hue) 50% 30%);
+}
+.tile-cefr-all-2 {
+    background: linear-gradient(135deg, hsl(var(--hue) 60% 85%), hsl(var(--hue) 55% 78%));
+    color: hsl(var(--hue) 50% 25%);
+}
+.tile-cefr-all-3 {
+    background: linear-gradient(135deg, hsl(var(--hue) 62% 78%), hsl(var(--hue) 58% 70%));
+    color: hsl(var(--hue) 50% 20%);
+}
+.tile-cefr-all-4 {
+    background: linear-gradient(135deg, hsl(var(--hue) 65% 70%), hsl(var(--hue) 60% 62%));
+    color: hsl(var(--hue) 40% 15%);
+}
+.tile-cefr-all-5 {
+    background: linear-gradient(135deg, hsl(var(--hue) 65% 62%), hsl(var(--hue) 60% 55%));
+    color: #ffffff;
+}
+.tile-cefr-all-6 {
+    background: linear-gradient(135deg, hsl(var(--hue) 60% 55%), hsl(var(--hue) 55% 48%));
+    color: #ffffff;
+}
+.tile-cefr-all-7 {
+    background: linear-gradient(135deg, hsl(var(--hue) 55% 48%), hsl(var(--hue) 50% 42%));
+    color: #ffffff;
+}
+.tile-cefr-all-8 {
+    background: linear-gradient(135deg, hsl(var(--hue) 50% 42%), hsl(var(--hue) 48% 36%));
+    color: #ffffff;
+}
+.tile-cefr-all-9 {
+    background: linear-gradient(135deg, hsl(var(--hue) 48% 36%), hsl(var(--hue) 45% 30%));
+    color: #ffffff;
+}
+.tile-cefr-all-10 {
+    background: linear-gradient(135deg, hsl(var(--hue) 45% 30%), hsl(var(--hue) 42% 24%));
+    color: #ffffff;
+}
+.tile-cefr-all-11 {
+    background: linear-gradient(135deg, hsl(var(--hue) 42% 24%), hsl(var(--hue) 40% 18%));
+    color: #ffd700;
+    font-weight: 900;
+    box-shadow: 0 0 20px hsl(var(--hue) 60% 50% / 0.5);
 }
 
 /* ============================

@@ -67,29 +67,36 @@ class WordGame {
             return (groupOrder[a[1].group] || 99) - (groupOrder[b[1].group] || 99);
         });
 
-        // 分组渲染
+        const bookColors = WordGame.BOOK_COLORS;
+
+        // 分组渲染（每组用 grid 容器实现两列布局）
         let lastGroup = null;
+        let gridContainer = null;
+        const groupLabels = { general: '📖 综合词书', scene: '🎯 场景词书', topic: '🧩 专题词书', exam: '🎓 考试词书' };
         sortedBooks.forEach(([id, book]) => {
-            // 分组标题
-            const groupLabels = { general: '📖 综合词书', scene: '🎯 场景词书', topic: '🧩 专题词书', exam: '🎓 考试词书' };
             if (book.group !== lastGroup) {
                 lastGroup = book.group;
                 const groupTitle = document.createElement('div');
                 groupTitle.className = 'wordbook-group-title';
                 groupTitle.textContent = groupLabels[book.group] || '其他';
                 container.appendChild(groupTitle);
+                gridContainer = document.createElement('div');
+                gridContainer.className = 'wordbook-grid';
+                container.appendChild(gridContainer);
             }
 
+            const hue = bookColors[id] !== undefined ? bookColors[id] : 210;
             const card = document.createElement('div');
             card.className = 'wordbook-card' + (id === activeBookId ? ' active' : '');
             card.dataset.bookId = id;
+            card.style.setProperty('--hue', hue);
             card.innerHTML = `
                 <span class="wordbook-emoji">${book.emoji || '📚'}</span>
                 <span class="wordbook-name">${book.name}</span>
                 <span class="wordbook-count">${book.totalWords}词</span>
             `;
             card.addEventListener('click', () => this.switchWordbook(id));
-            container.appendChild(card);
+            gridContainer.appendChild(card);
         });
     }
 
@@ -371,14 +378,26 @@ class WordGame {
     // 创建tile DOM元素
     createTileElement(cell) {
         const tile = document.createElement('div');
-        tile.className = `tile tile-cefr-${cell.cefr}-${cell.level}`;
+        const standardCEFR = ['A1', 'A2', 'B1', 'B2', 'C1'];
+        const isStandard = standardCEFR.includes(cell.cefr);
+
+        // 标准 CEFR 用原有配色，非标准（all/高频/核心等）统一用 --hue 配色
+        if (isStandard) {
+            tile.className = `tile tile-cefr-${cell.cefr}-${cell.level}`;
+        } else {
+            tile.className = `tile tile-cefr-all-${cell.level}`;
+            const hue = WordGame.BOOK_COLORS[this.vocabManager.activeBookId];
+            if (hue !== undefined) tile.style.setProperty('--hue', hue);
+        }
+
         tile.id = `tile-${cell.id}`;
         tile.style.left = this.getPosition(cell.y) + 'px';
         tile.style.top = this.getPosition(cell.x) + 'px';
 
         const meaningDisplay = cell.meaning || '';
+        const badgeLabel = isStandard ? cell.cefr : '';
         tile.innerHTML = `
-            <div class="tile-cefr-badge cefr-${cell.cefr}">${cell.cefr}</div>
+            ${badgeLabel ? `<div class="tile-cefr-badge cefr-${cell.cefr}">${badgeLabel}</div>` : ''}
             <div class="tile-word">${cell.word}</div>
             <div class="tile-meaning">${meaningDisplay}</div>
             <div class="tile-level">${cell.value}</div>
@@ -805,6 +824,25 @@ class WordGame {
         }
     }
 }
+
+// 每个词书的独特色相 (HSL hue)
+WordGame.BOOK_COLORS = {
+    'oxford5000': 210,
+    'scene_food': 15, 'scene_clothing': 340, 'scene_home': 25,
+    'scene_transport': 200, 'scene_health': 160, 'scene_shopping': 330,
+    'scene_nature': 140, 'scene_entertainment': 280, 'scene_travel': 190,
+    'scene_work': 215, 'scene_school': 45, 'scene_social': 350,
+    'scene_fitness': 10, 'scene_music': 270, 'scene_animals': 35,
+    'scene_plants': 130, 'scene_festivals': 0, 'scene_cooking': 20,
+    'scene_law': 230,
+    'topic_tech': 205, 'topic_social_media': 260, 'topic_gaming': 290,
+    'topic_finance': 40, 'topic_marketing': 320, 'topic_film': 300,
+    'topic_medical': 170, 'topic_science': 185, 'topic_space': 240,
+    'topic_art': 310, 'topic_politics': 220, 'topic_math': 55,
+    'topic_environment': 145, 'topic_psychology': 275, 'topic_sports': 120,
+    'topic_architecture': 30, 'topic_ai': 250,
+    'cet4': 38, 'cet6': 22,
+};
 
 // 初始化游戏
 let game;
