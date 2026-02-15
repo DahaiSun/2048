@@ -381,13 +381,11 @@ class WordGame {
         const standardCEFR = ['A1', 'A2', 'B1', 'B2', 'C1'];
         const isStandard = standardCEFR.includes(cell.cefr);
 
-        // 标准 CEFR 用原有配色，非标准（all/高频/核心等）统一用 --hue 配色
+        // 标准 CEFR 用原有配色，非标准（all/高频/核心等）用彩虹级别配色
         if (isStandard) {
             tile.className = `tile tile-cefr-${cell.cefr}-${cell.level}`;
         } else {
             tile.className = `tile tile-cefr-all-${cell.level}`;
-            const hue = WordGame.BOOK_COLORS[this.vocabManager.activeBookId];
-            if (hue !== undefined) tile.style.setProperty('--hue', hue);
         }
 
         tile.id = `tile-${cell.id}`;
