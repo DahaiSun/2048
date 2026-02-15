@@ -15,7 +15,7 @@ registerWordbook('scene_entertainment', {
                 { word: "album", meaning: "专辑", audio: "album.wav" },
                 { word: "art", meaning: "艺术", audio: "art.wav" },
                 { word: "artist", meaning: "艺术家", audio: "artist.wav" },
-                { word: "athletics", meaning: "田径", audio: "athletics.wav" },
+                { word: "athletics", meaning: "田径运动", audio: "athletics.wav" },
                 { word: "audience", meaning: "观众", audio: "audience.wav" },
                 { word: "ballet", meaning: "芭蕾舞", audio: "ballet.wav" },
                 { word: "band", meaning: "乐队", audio: "band.wav" },

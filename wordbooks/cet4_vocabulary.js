@@ -322,7 +322,7 @@ registerWordbook('cet4', {
                 { word: "correspond", meaning: "对应", audio: "correspond.wav" },
                 { word: "cost", meaning: "成本", audio: "cost.wav" },
                 { word: "council", meaning: "理事会", audio: "council.wav" },
-                { word: "counsel", meaning: "忠告", audio: "counsel.wav" },
+                { word: "counsel", meaning: "劝告; 忠告", audio: "counsel.wav" },
                 { word: "counter", meaning: "柜台", audio: "counter.wav" },
                 { word: "course", meaning: "课程", audio: "course.wav" },
                 { word: "crash", meaning: "碰撞", audio: "crash.wav" },

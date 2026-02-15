@@ -54,7 +54,7 @@ registerWordbook('scene_social', {
                 { word: "disappoint", meaning: "辜负", audio: "disappoint.wav" },
                 { word: "emotion", meaning: "情感", audio: "emotion.wav" },
                 { word: "emotional", meaning: "情绪化的", audio: "emotional.wav" },
-                { word: "empathy", meaning: "同理心", audio: "empathy.wav" },
+                { word: "empathy", meaning: "共情; 同理心", audio: "empathy.wav" },
                 { word: "encourage", meaning: "鼓励", audio: "encourage.wav" },
                 { word: "enthusiasm", meaning: "热情", audio: "enthusiasm.wav" },
                 { word: "envy", meaning: "嫉妒", audio: "envy.wav" },

@@ -56,7 +56,7 @@ registerWordbook('topic_medical', {
                 { word: "discharge", meaning: "释放", audio: "discharge.wav" },
                 { word: "disease", meaning: "疾病", audio: "disease.wav" },
                 { word: "disorder", meaning: "紊乱", audio: "disorder.wav" },
-                { word: "dizzy", meaning: "头晕", audio: "dizzy.wav" },
+                { word: "dizzy", meaning: "头晕的", audio: "dizzy.wav" },
                 { word: "doctor", meaning: "医生", audio: "doctor.wav" },
                 { word: "dose", meaning: "剂量", audio: "dose.wav" },
                 { word: "drug", meaning: "药品", audio: "drug.wav" },

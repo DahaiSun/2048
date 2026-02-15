@@ -38,7 +38,7 @@ registerWordbook('scene_cooking', {
                 { word: "counter", meaning: "柜台", audio: "counter.wav" },
                 { word: "cream", meaning: "奶油", audio: "cream.wav" },
                 { word: "crush", meaning: "压碎", audio: "crush.wav" },
-                { word: "cube", meaning: "切丁", audio: "cube.wav" },
+                { word: "cube", meaning: "切成丁", audio: "cube.wav" },
                 { word: "cup", meaning: "杯子", audio: "cup.wav" },
                 { word: "cut", meaning: "切割", audio: "cut.wav" },
                 { word: "deep", meaning: "深的", audio: "deep.wav" },

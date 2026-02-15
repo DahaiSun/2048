@@ -9,7 +9,7 @@ registerWordbook('topic_marketing', {
             words: [
                 { word: "advertise", meaning: "广告", audio: "advertise.wav" },
                 { word: "advertisement", meaning: "广告", audio: "advertisement.wav" },
-                { word: "affiliate", meaning: "联盟", audio: "affiliate.wav" },
+                { word: "affiliate", meaning: "联盟营销", audio: "affiliate.wav" },
                 { word: "agency", meaning: "机构", audio: "agency.wav" },
                 { word: "analyse", meaning: "分析", audio: "analyse.wav" },
                 { word: "appeal", meaning: "上诉", audio: "appeal.wav" },

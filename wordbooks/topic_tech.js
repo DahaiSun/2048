@@ -32,7 +32,7 @@ registerWordbook('topic_tech', {
                 { word: "compute", meaning: "计算", audio: "compute.wav" },
                 { word: "connect", meaning: "连接", audio: "connect.wav" },
                 { word: "convert", meaning: "转变", audio: "convert.wav" },
-                { word: "cookie", meaning: "小型文本文件", audio: "cookie.wav" },
+                { word: "cookie", meaning: "浏览器Cookie", audio: "cookie.wav" },
                 { word: "crash", meaning: "碰撞", audio: "crash.wav" },
                 { word: "cursor", meaning: "光标", audio: "cursor.wav" },
                 { word: "cyber", meaning: "网络的", audio: "cyber.wav" },

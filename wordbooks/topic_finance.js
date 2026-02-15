@@ -14,7 +14,7 @@ registerWordbook('topic_finance', {
                 { word: "asset", meaning: "资产", audio: "asset.wav" },
                 { word: "audit", meaning: "审计", audio: "audit.wav" },
                 { word: "balance", meaning: "平衡", audio: "balance.wav" },
-                { word: "bankrupt", meaning: "破产", audio: "bankrupt.wav" },
+                { word: "bankrupt", meaning: "破产的", audio: "bankrupt.wav" },
                 { word: "bargain", meaning: "便宜货", audio: "bargain.wav" },
                 { word: "bear", meaning: "熊", audio: "bear.wav" },
                 { word: "benefit", meaning: "益处", audio: "benefit.wav" },
