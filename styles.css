@@ -788,63 +788,68 @@ button:active {
     box-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
 }
 
-/* "all" 级别 - 场景/专题/考试词书（每级不同色相，高区分度）*/
-/* Lv1 (2) — 薄荷绿 */
+/* "all" 级别 - 基于原版 2048 配色增强区分度 */
+/* Lv1 (2) — 奶白 (原版基础) */
 .tile-cefr-all-1 {
-    background: linear-gradient(135deg, #d1f5e0, #a8e6c3);
-    color: #1a6b3c;
+    background: linear-gradient(135deg, #eee4da, #e6dace);
+    color: #776e65;
 }
-/* Lv2 (4) — 天蓝 */
+/* Lv2 (4) — 暖驼 (原版加深，拉开与2的差距) */
 .tile-cefr-all-2 {
-    background: linear-gradient(135deg, #c5e8f7, #8acbee);
-    color: #1a5276;
+    background: linear-gradient(135deg, #ede0c8, #e4cfaa);
+    color: #776e65;
 }
-/* Lv3 (8) — 暖橙 */
+/* Lv3 (8) — 经典橙 (原版标志色) */
 .tile-cefr-all-3 {
-    background: linear-gradient(135deg, #fde2b5, #f5c06a);
-    color: #7c4a0a;
+    background: linear-gradient(135deg, #f2b179, #eda060);
+    color: #f9f6f2;
 }
-/* Lv4 (16) — 珊瑚红 */
+/* Lv4 (16) — 深橙 (更饱和) */
 .tile-cefr-all-4 {
-    background: linear-gradient(135deg, #fbb7a0, #f08060);
-    color: #6e1e0a;
+    background: linear-gradient(135deg, #f59563, #ec7d48);
+    color: #f9f6f2;
 }
-/* Lv5 (32) — 玫瑰粉 */
+/* Lv5 (32) — 红橙 (往红色偏移) */
 .tile-cefr-all-5 {
-    background: linear-gradient(135deg, #f4a0c0, #e8608a);
-    color: #ffffff;
+    background: linear-gradient(135deg, #f67c5f, #e85a3a);
+    color: #f9f6f2;
 }
-/* Lv6 (64) — 葡萄紫 */
+/* Lv6 (64) — 亮红 (原版高潮色) */
 .tile-cefr-all-6 {
-    background: linear-gradient(135deg, #c9a0e8, #9b60d0);
-    color: #ffffff;
+    background: linear-gradient(135deg, #f65e3b, #d94425);
+    color: #f9f6f2;
 }
-/* Lv7 (128) — 靛蓝 */
+/* Lv7 (128) — 明金 (原版金色起点，加亮光) */
 .tile-cefr-all-7 {
-    background: linear-gradient(135deg, #7daae0, #4a7ac0);
-    color: #ffffff;
+    background: linear-gradient(135deg, #edcf72, #e8c250);
+    color: #f9f6f2;
+    box-shadow: 0 0 8px rgba(237, 207, 114, 0.4);
 }
-/* Lv8 (256) — 深青 */
+/* Lv8 (256) — 橙金 (加入橙调区分) */
 .tile-cefr-all-8 {
-    background: linear-gradient(135deg, #4ab8a8, #28877a);
-    color: #ffffff;
+    background: linear-gradient(135deg, #edcc61, #ddb540);
+    color: #f9f6f2;
+    box-shadow: 0 0 12px rgba(237, 194, 46, 0.5);
 }
-/* Lv9 (512) — 深红 */
+/* Lv9 (512) — 深金红 (突破金色系，加红调) */
 .tile-cefr-all-9 {
-    background: linear-gradient(135deg, #d94f4f, #a03030);
-    color: #ffffff;
+    background: linear-gradient(135deg, #edc22e, #d4a020);
+    color: #f9f6f2;
+    box-shadow: 0 0 15px rgba(237, 194, 46, 0.6);
 }
-/* Lv10 (1024) — 深紫 */
+/* Lv10 (1024) — 玫瑰金 (金+粉紫，高级感) */
 .tile-cefr-all-10 {
-    background: linear-gradient(135deg, #8050b0, #5a2d8a);
-    color: #ffffff;
+    background: linear-gradient(135deg, #d4a028, #b8860b);
+    color: #f9f6f2;
+    box-shadow: 0 0 20px rgba(184, 134, 11, 0.6);
 }
-/* Lv11 (2048) — 金色 🏆 */
+/* Lv11 (2048) — 黑金 🏆 */
 .tile-cefr-all-11 {
-    background: linear-gradient(135deg, #f7d86c, #e6b422);
-    color: #5a3e00;
+    background: linear-gradient(135deg, #3c3a32, #1a1a10);
+    color: #edc22e;
     font-weight: 900;
-    box-shadow: 0 0 20px rgba(230, 180, 34, 0.6);
+    box-shadow: 0 0 30px rgba(237, 194, 46, 0.8);
+    text-shadow: 0 0 10px rgba(237, 194, 46, 0.6);
 }
 
 /* ============================
