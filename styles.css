@@ -6,7 +6,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #faf8ef;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -25,10 +25,9 @@ body {
 }
 
 h1 {
-    color: #ffffff;
+    color: #776e65;
     font-size: 2.5em;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
     animation: fadeInDown 0.5s ease-out;
 }
 
@@ -45,19 +44,12 @@ h1 {
 }
 
 .score-container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 8px 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background: #bbada0;
+    padding: 6px 10px;
+    border-radius: 8px;
     text-align: center;
     flex: 1;
     min-width: 60px;
-    transition: transform 0.3s;
-}
-
-.score-container:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .settings-content {
@@ -68,15 +60,14 @@ h1 {
 }
 
 .setting-item {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    background: #eee4da;
+    padding: 12px;
+    border-radius: 8px;
 }
 
 .score-label {
     font-size: 0.6em;
-    color: #7f8c8d;
+    color: #eee4da;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 600;
@@ -85,7 +76,7 @@ h1 {
 .score-value {
     font-size: 1.1em;
     font-weight: bold;
-    color: #2c3e50;
+    color: #ffffff;
     margin-top: 2px;
 }
 
@@ -264,37 +255,37 @@ h1 {
 
 button {
     border: none;
-    padding: 12px 24px;
-    border-radius: 10px;
-    font-size: 1em;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.95em;
     cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+    font-weight: 700;
+    box-shadow: none;
 }
 
 button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    filter: brightness(0.92);
 }
 
 button:active {
-    transform: translateY(-1px);
+    filter: brightness(0.85);
+    transform: scale(0.97);
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #3498db, #2874a6);
-    color: white;
+    background: #8f7a66;
+    color: #f9f6f2;
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
-    color: white;
+    background: #bbada0;
+    color: #f9f6f2;
 }
 
 .btn-warning {
-    background: linear-gradient(135deg, #e67e22, #d35400);
-    color: white;
+    background: #e67e22;
+    color: #f9f6f2;
 }
 
 
@@ -304,9 +295,9 @@ button:active {
 .game-container {
     position: relative;
     background: #bbada0;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 15px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
     touch-action: none;
     animation: fadeInUp 0.5s ease-out;
 }
@@ -343,14 +334,13 @@ button:active {
     position: absolute;
     width: 77px;
     height: 77px;
-    border-radius: 8px;
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-weight: bold;
     transition: transform 150ms ease-in-out, left 0s, top 0s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 10;
     pointer-events: auto;
     cursor: pointer;
@@ -358,8 +348,7 @@ button:active {
 }
 
 .tile:hover {
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    filter: brightness(1.08);
+    filter: brightness(1.06);
 }
 
 .tile-new {
@@ -862,10 +851,10 @@ button:active {
 }
 
 .modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    background: #faf8ef;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
     max-width: 500px;
     width: 90%;
     max-height: 80vh;
@@ -886,8 +875,8 @@ button:active {
 }
 
 .modal-content h2 {
-    color: #2c3e50;
-    margin-bottom: 20px;
+    color: #776e65;
+    margin-bottom: 16px;
     text-align: center;
 }
 
@@ -918,9 +907,9 @@ button:active {
     justify-content: space-between;
     padding: 12px;
     margin: 8px 0;
-    background: #f8f9fa;
+    background: #eee4da;
     border-radius: 8px;
-    border-left: 4px solid #3498db;
+    border-left: 4px solid #8f7a66;
 }
 
 .stat-label {
@@ -956,20 +945,18 @@ button:active {
 }
 
 .word-badge {
-    background: linear-gradient(135deg, #3498db, #2874a6);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 15px;
-    font-size: 0.85em;
+    background: #8f7a66;
+    color: #f9f6f2;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.82em;
     font-weight: 600;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.15s;
 }
 
 .word-badge:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background: #776e65;
 }
 
 /* ============================
