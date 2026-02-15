@@ -4947,3 +4947,20 @@ const OXFORD_VOCABULARY = {
   ],  // C1: 1273 words
 
 };
+
+// 将 Oxford 5000 注册到词书注册表（与其他词书统一管理）
+if (typeof registerWordbook === 'function') {
+    registerWordbook('oxford_5000', {
+        name: 'Oxford 5000',
+        emoji: '📖',
+        group: 'general',
+        description: 'Oxford 5000 核心词汇，按CEFR等级分类',
+        levels: {
+            A1: { name: '🌱 A1 入门', words: OXFORD_VOCABULARY['A1'] || [] },
+            A2: { name: '🌿 A2 初级', words: OXFORD_VOCABULARY['A2'] || [] },
+            B1: { name: '🌳 B1 中级', words: OXFORD_VOCABULARY['B1'] || [] },
+            B2: { name: '🔥 B2 中高级', words: OXFORD_VOCABULARY['B2'] || [] },
+            C1: { name: '⚡ C1 高级', words: OXFORD_VOCABULARY['C1'] || [] },
+        }
+    });
+}

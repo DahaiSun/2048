@@ -825,7 +825,7 @@ class WordGame {
 
 // 每个词书的独特色相 (HSL hue)
 WordGame.BOOK_COLORS = {
-    'oxford5000': 210,
+    'oxford_5000': 210,
     'scene_food': 15, 'scene_clothing': 340, 'scene_home': 25,
     'scene_transport': 200, 'scene_health': 160, 'scene_shopping': 330,
     'scene_nature': 140, 'scene_entertainment': 280, 'scene_travel': 190,
