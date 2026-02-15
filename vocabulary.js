@@ -229,8 +229,8 @@ class SoundGenerator {
 class VocabularyManager {
     constructor() {
         // 多词书模式：优先使用 WORDBOOK_REGISTRY
-        this.activeBookId = 'oxford_5000';  // 默认词书
-        this.activeLevels = ['A1'];         // 默认等级
+        this.activeBookId = 'oxford_a1';    // 默认词书
+        this.activeLevels = ['all'];        // 默认等级
         this.wordPool = [];                 // 当前活跃的词池
         this.usedWords = new Set();         // 已使用的单词（避免短期重复）
         this._unusedQueue = [];             // 洗牌队列：优先出未出现过的单词

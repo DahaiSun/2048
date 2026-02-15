@@ -35,8 +35,18 @@ class WordGame {
 
     initLevelSelector() {
         // 从 localStorage 恢复词书和等级选择
-        const savedBook = localStorage.getItem('wordGameActiveBook') || 'oxford_5000';
-        const savedLevels = JSON.parse(localStorage.getItem('wordGameActiveLevels') || '["A1"]');
+        let savedBook = localStorage.getItem('wordGameActiveBook') || 'oxford_a1';
+        let savedLevels = JSON.parse(localStorage.getItem('wordGameActiveLevels') || '["all"]');
+
+        // 向后兼容：旧版 oxford_5000 迁移到拆分后的词书
+        if (savedBook === 'oxford_5000') {
+            const cefrMap = { 'A1': 'oxford_a1', 'A2': 'oxford_a2', 'B1': 'oxford_b1', 'B2': 'oxford_b2', 'C1': 'oxford_c1' };
+            const firstLevel = savedLevels[0] || 'A1';
+            savedBook = cefrMap[firstLevel] || 'oxford_a1';
+            savedLevels = ['all'];
+            localStorage.setItem('wordGameActiveBook', savedBook);
+            localStorage.setItem('wordGameActiveLevels', JSON.stringify(savedLevels));
+        }
 
         // 设置词书（不触发 refreshPool，因为还要设等级）
         const books = this.vocabManager.getAvailableBooks();
@@ -61,8 +71,8 @@ class WordGame {
         const books = this.vocabManager.getAvailableBooks();
         const activeBookId = this.vocabManager.activeBookId;
 
-        // 按分组排序：general → scene → topic → exam
-        const groupOrder = { general: 0, scene: 1, topic: 2, exam: 3 };
+        // 按分组排序：oxford → scene → topic → exam → general
+        const groupOrder = { oxford: 0, scene: 1, topic: 2, exam: 3, general: 4 };
         const sortedBooks = Object.entries(books).sort((a, b) => {
             return (groupOrder[a[1].group] || 99) - (groupOrder[b[1].group] || 99);
         });
@@ -72,7 +82,7 @@ class WordGame {
         // 分组渲染（每组用 grid 容器实现两列布局）
         let lastGroup = null;
         let gridContainer = null;
-        const groupLabels = { general: '📖 综合词书', scene: '🎯 场景词书', topic: '🧩 专题词书', exam: '🎓 考试词书' };
+        const groupLabels = { oxford: '📖 Oxford 5000', scene: '🎯 场景词书', topic: '🧩 专题词书', exam: '🎓 考试词书', general: '📚 综合词书' };
         sortedBooks.forEach(([id, book]) => {
             if (book.group !== lastGroup) {
                 lastGroup = book.group;
@@ -825,7 +835,7 @@ class WordGame {
 
 // 每个词书的独特色相 (HSL hue)
 WordGame.BOOK_COLORS = {
-    'oxford_5000': 210,
+    'oxford_a1': 120, 'oxford_a2': 160, 'oxford_b1': 200, 'oxford_b2': 30, 'oxford_c1': 270,
     'scene_food': 15, 'scene_clothing': 340, 'scene_home': 25,
     'scene_transport': 200, 'scene_health': 160, 'scene_shopping': 330,
     'scene_nature': 140, 'scene_entertainment': 280, 'scene_travel': 190,
