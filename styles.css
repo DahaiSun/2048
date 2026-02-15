@@ -788,69 +788,18 @@ button:active {
     box-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
 }
 
-/* "all" 级别 - 基于原版 2048 配色增强区分度 */
-/* Lv1 (2) — 奶白 (原版基础) */
-.tile-cefr-all-1 {
-    background: linear-gradient(135deg, #eee4da, #e6dace);
-    color: #776e65;
-}
-/* Lv2 (4) — 暖驼 (原版加深，拉开与2的差距) */
-.tile-cefr-all-2 {
-    background: linear-gradient(135deg, #ede0c8, #e4cfaa);
-    color: #776e65;
-}
-/* Lv3 (8) — 经典橙 (原版标志色) */
-.tile-cefr-all-3 {
-    background: linear-gradient(135deg, #f2b179, #eda060);
-    color: #f9f6f2;
-}
-/* Lv4 (16) — 深橙 (更饱和) */
-.tile-cefr-all-4 {
-    background: linear-gradient(135deg, #f59563, #ec7d48);
-    color: #f9f6f2;
-}
-/* Lv5 (32) — 红橙 (往红色偏移) */
-.tile-cefr-all-5 {
-    background: linear-gradient(135deg, #f67c5f, #e85a3a);
-    color: #f9f6f2;
-}
-/* Lv6 (64) — 亮红 (原版高潮色) */
-.tile-cefr-all-6 {
-    background: linear-gradient(135deg, #f65e3b, #d94425);
-    color: #f9f6f2;
-}
-/* Lv7 (128) — 明金 (原版金色起点，加亮光) */
-.tile-cefr-all-7 {
-    background: linear-gradient(135deg, #edcf72, #e8c250);
-    color: #f9f6f2;
-    box-shadow: 0 0 8px rgba(237, 207, 114, 0.4);
-}
-/* Lv8 (256) — 橙金 (加入橙调区分) */
-.tile-cefr-all-8 {
-    background: linear-gradient(135deg, #edcc61, #ddb540);
-    color: #f9f6f2;
-    box-shadow: 0 0 12px rgba(237, 194, 46, 0.5);
-}
-/* Lv9 (512) — 深金红 (突破金色系，加红调) */
-.tile-cefr-all-9 {
-    background: linear-gradient(135deg, #edc22e, #d4a020);
-    color: #f9f6f2;
-    box-shadow: 0 0 15px rgba(237, 194, 46, 0.6);
-}
-/* Lv10 (1024) — 玫瑰金 (金+粉紫，高级感) */
-.tile-cefr-all-10 {
-    background: linear-gradient(135deg, #d4a028, #b8860b);
-    color: #f9f6f2;
-    box-shadow: 0 0 20px rgba(184, 134, 11, 0.6);
-}
-/* Lv11 (2048) — 黑金 🏆 */
-.tile-cefr-all-11 {
-    background: linear-gradient(135deg, #3c3a32, #1a1a10);
-    color: #edc22e;
-    font-weight: 900;
-    box-shadow: 0 0 30px rgba(237, 194, 46, 0.8);
-    text-shadow: 0 0 10px rgba(237, 194, 46, 0.6);
-}
+/* "all" 级别 - 经典原版 2048 配色 */
+.tile-cefr-all-1  { background: #eee4da; color: #776e65; }
+.tile-cefr-all-2  { background: #ede0c8; color: #776e65; }
+.tile-cefr-all-3  { background: #f2b179; color: #f9f6f2; }
+.tile-cefr-all-4  { background: #f59563; color: #f9f6f2; }
+.tile-cefr-all-5  { background: #f67c5f; color: #f9f6f2; }
+.tile-cefr-all-6  { background: #f65e3b; color: #f9f6f2; }
+.tile-cefr-all-7  { background: #edcf72; color: #f9f6f2; }
+.tile-cefr-all-8  { background: #edcc61; color: #f9f6f2; }
+.tile-cefr-all-9  { background: #edc850; color: #f9f6f2; }
+.tile-cefr-all-10 { background: #edc53f; color: #f9f6f2; }
+.tile-cefr-all-11 { background: #edc22e; color: #f9f6f2; font-weight: 900; }
 
 /* ============================
    Toast Notification
